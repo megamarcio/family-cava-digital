@@ -11,11 +11,11 @@ export default function Upsell() {
 
   function accept() {
     saveFunnel({ upsell: true })
-    nav('/obrigado')
+    nav('/protocolo')
   }
   function decline() {
     if (!declined) setDeclined(true) // mostra downsell
-    else nav('/obrigado')
+    else nav('/protocolo')
   }
 
   return (

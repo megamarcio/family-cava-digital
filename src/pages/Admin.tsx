@@ -4,16 +4,17 @@ import { taskGroups } from '../data/tasks'
 import { competitors, insights, priceSuggestion } from '../data/research'
 import { mainOffer, orderBump, upsell, downsell, brl } from '../data/offer'
 import {
-  loadDoneTasks, toggleTask, loadConfig, saveConfig, type AdminConfig,
+  loadDoneTasks, toggleTask, loadConfig, saveConfig, type AdminConfig, type Supplier,
 } from '../lib/store'
 
-type Tab = 'overview' | 'tasks' | 'pay' | 'video' | 'offer' | 'research'
+type Tab = 'overview' | 'tasks' | 'pay' | 'video' | 'delivery' | 'offer' | 'research'
 
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: 'overview', label: 'Visão geral', icon: '📊' },
   { id: 'tasks', label: 'Tarefas', icon: '✅' },
   { id: 'pay', label: 'Pagamentos', icon: '💳' },
   { id: 'video', label: 'Vídeos', icon: '🎬' },
+  { id: 'delivery', label: 'Entrega', icon: '📦' },
   { id: 'offer', label: 'Oferta & Preço', icon: '🏷️' },
   { id: 'research', label: 'Pesquisa', icon: '🔬' },
 ]
@@ -29,6 +30,18 @@ export default function Admin() {
 
   function flip(id: string) { setDone({ ...toggleTask(id) }) }
   function setField(patch: Partial<AdminConfig>) { setCfg(saveConfig(patch)) }
+
+  const suppliers = cfg.suppliers || []
+  function addSupplier(pais: 'BR' | 'US') {
+    setField({ suppliers: [...suppliers, { nome: '', pais, contato: '', obs: '' }] })
+  }
+  function updateSupplier(index: number, patch: Partial<Supplier>) {
+    const next = suppliers.map((s, i) => (i === index ? { ...s, ...patch } : s))
+    setField({ suppliers: next })
+  }
+  function removeSupplier(index: number) {
+    setField({ suppliers: suppliers.filter((_, i) => i !== index) })
+  }
 
   return (
     <div className="min-h-screen md:flex">
@@ -118,8 +131,53 @@ export default function Admin() {
             <div className="grid gap-5">
               <Field label="VSL da Landing Page" value={cfg.vslUrl} onChange={(v) => setField({ vslUrl: v })} placeholder="https://www.youtube.com/embed/..." />
               <Field label="Vídeo de abertura do Quiz" value={cfg.quizVideoUrl} onChange={(v) => setField({ quizVideoUrl: v })} placeholder="https://player.vimeo.com/video/..." />
+              <Field label="Vídeo de manipulação (página pós-compra)" value={cfg.manipulacaoVideoUrl} onChange={(v) => setField({ manipulacaoVideoUrl: v })} placeholder="https://www.youtube.com/embed/..." />
             </div>
             <p className="mt-4 text-xs text-white/40">Dica: para VSL, hospede em plataforma que mostre retenção (ex.: VTurb, Vimeo). O CTA aparece sozinho no tempo certo no player de demonstração.</p>
+          </div>
+        )}
+
+        {tab === 'delivery' && (
+          <div>
+            <H title="Entrega (página pós-compra)" sub="Tudo isto aparece SOMENTE para quem pagou, na página personalizada /protocolo: vídeo de manipulação + fornecedores." />
+
+            <div className="mb-6">
+              <Field label="Vídeo: como manipular peptídeos" value={cfg.manipulacaoVideoUrl} onChange={(v) => setField({ manipulacaoVideoUrl: v })} placeholder="https://www.youtube.com/embed/..." />
+            </div>
+
+            {(['BR', 'US'] as const).map((pais) => (
+              <div key={pais} className="mb-6">
+                <div className="mb-3 flex items-center justify-between">
+                  <h3 className="text-lg font-bold">{pais === 'BR' ? '🇧🇷 Fornecedores — Brasil' : '🇺🇸 Fornecedores — EUA'}</h3>
+                  <button onClick={() => addSupplier(pais)} className="rounded-full bg-lime-glow/15 px-4 py-2 text-sm font-semibold text-lime-glow hover:bg-lime-glow/25">
+                    + Adicionar
+                  </button>
+                </div>
+                <div className="grid gap-3">
+                  {suppliers.map((s, i) => s.pais === pais ? (
+                    <div key={i} className="rounded-2xl glass p-4">
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <input value={s.nome} onChange={(e) => updateSupplier(i, { nome: e.target.value })} placeholder="Nome do fornecedor"
+                          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-lime-glow" />
+                        <input value={s.contato} onChange={(e) => updateSupplier(i, { contato: e.target.value })} placeholder="Contato (site, WhatsApp, e-mail)"
+                          className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-lime-glow" />
+                      </div>
+                      <div className="mt-3 flex gap-3">
+                        <input value={s.obs || ''} onChange={(e) => updateSupplier(i, { obs: e.target.value })} placeholder="Observação (ex.: laudo HPLC, prazo, frete)"
+                          className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 outline-none focus:border-lime-glow" />
+                        <button onClick={() => removeSupplier(i)} className="rounded-xl border border-red-400/30 px-4 text-sm text-red-300 hover:bg-red-400/10">
+                          Remover
+                        </button>
+                      </div>
+                    </div>
+                  ) : null)}
+                  {!suppliers.some((s) => s.pais === pais) && (
+                    <p className="rounded-xl glass p-4 text-sm text-white/40">Nenhum fornecedor cadastrado ainda. Clique em “+ Adicionar”.</p>
+                  )}
+                </div>
+              </div>
+            ))}
+            <p className="text-xs text-white/40">Salvo automaticamente no navegador. Em produção, mova para o backend para controlar o acesso de quem pagou.</p>
           </div>
         )}
 
@@ -179,6 +237,8 @@ function Overview({ pct, completed, total, cfg, setTab }: {
     { ok: !!cfg.globalpayKey || !!cfg.noxpayKey, label: 'Gateway de pagamento configurado' },
     { ok: !!cfg.vslUrl, label: 'VSL da landing configurada' },
     { ok: !!cfg.quizVideoUrl, label: 'Vídeo do quiz configurado' },
+    { ok: !!cfg.manipulacaoVideoUrl, label: 'Vídeo de manipulação configurado' },
+    { ok: (cfg.suppliers || []).length > 0, label: 'Fornecedores cadastrados' },
     { ok: !!cfg.pixKey, label: 'Chave PIX cadastrada' },
   ]
   return (

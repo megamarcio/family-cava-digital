@@ -5,11 +5,13 @@ const KEY = 'pep_funnel_v1'
 
 export interface FunnelState {
   goal?: Goal
+  goals?: Goal[]
   email?: string
   nome?: string
   whatsapp?: string
   bump?: boolean
   upsell?: boolean
+  paid?: boolean
 }
 
 export function loadFunnel(): FunnelState {
@@ -44,13 +46,22 @@ export function toggleTask(id: string): Record<string, boolean> {
 
 // Config de pagamento/vídeo do admin
 const CONFIG_KEY = 'pep_config_v1'
+export interface Supplier {
+  nome: string
+  pais: 'BR' | 'US'
+  contato: string
+  obs?: string
+}
+
 export interface AdminConfig {
   globalpayKey?: string
   noxpayKey?: string
   vslUrl?: string
   quizVideoUrl?: string
+  manipulacaoVideoUrl?: string
   pixKey?: string
   whatsapp?: string
+  suppliers?: Supplier[]
 }
 export function loadConfig(): AdminConfig {
   try {

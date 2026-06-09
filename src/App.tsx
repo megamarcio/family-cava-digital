@@ -5,6 +5,7 @@ import Resultado from './pages/Resultado'
 import Checkout from './pages/Checkout'
 import Upsell from './pages/Upsell'
 import Obrigado from './pages/Obrigado'
+import Protocolo from './pages/Protocolo'
 import Admin from './pages/Admin'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/resultado" element={<Resultado />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/upsell" element={<Upsell />} />
+        <Route path="/protocolo" element={<Protocolo />} />
         <Route path="/obrigado" element={<Obrigado />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Landing />} />

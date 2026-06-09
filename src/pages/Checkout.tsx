@@ -18,7 +18,8 @@ export default function Checkout() {
   function pay(e: React.FormEvent) {
     e.preventDefault()
     setProcessing(true)
-    saveFunnel({ bump })
+    // Em produção, o "paid" deve ser definido pelo WEBHOOK do gateway, não aqui.
+    saveFunnel({ bump, paid: true })
     // Em produção: chamar API do gateway (Globalpay/Nox Pay) -> retorno -> webhook libera entrega.
     setTimeout(() => nav('/upsell'), 1400)
   }

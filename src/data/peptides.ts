@@ -23,6 +23,72 @@ export interface Peptide {
   goals: Goal[]
 }
 
+// Detalhes do protocolo — conteúdo PREMIUM, liberado apenas após o pagamento.
+// Valores de referência citados na literatura/comunidade; NÃO são prescrição.
+export interface ProtocolDetail {
+  dosagem: string
+  ciclo: string
+  aplicacao: string
+  sinergia?: string
+}
+
+export const protocolDetails: Record<string, ProtocolDetail> = {
+  'bpc-157': {
+    dosagem: 'Faixa de referência: 250–500 mcg por dia (subcutâneo), próximo à região da lesão quando possível.',
+    ciclo: '4 a 6 semanas de uso contínuo, seguidas de pausa. Reavaliar conforme evolução.',
+    aplicacao: 'Reconstituir o liofilizado com água bacteriostática, aplicar subcutâneo com seringa de insulina. Rotacionar o local.',
+    sinergia: 'Combina com TB-500 (stack "Wolverine") para recuperação acelerada.',
+  },
+  'tb-500': {
+    dosagem: 'Fase de carga: 2–2,5 mg, 2x/semana por 4–6 semanas. Manutenção: 2–2,5 mg a cada 1–2 semanas.',
+    ciclo: 'Carga de 4–6 semanas e depois manutenção. Pausar e reavaliar.',
+    aplicacao: 'Subcutâneo ou intramuscular após reconstituição com água bacteriostática.',
+    sinergia: 'Clássico com BPC-157 para reparo sistêmico.',
+  },
+  'ghk-cu': {
+    dosagem: 'Tópico (séruns 1–3%) para pele; injetável 1–2 mg/dia em protocolos avançados.',
+    ciclo: 'Tópico: uso contínuo. Injetável: ciclos de 4–8 semanas.',
+    aplicacao: 'Tópico no rosto/couro cabeludo limpo; injetável subcutâneo após reconstituição.',
+  },
+  'cjc-ipa': {
+    dosagem: 'CJC-1295 (no DAC) 100 mcg + Ipamorelina 100–200 mcg, 1–2x/dia.',
+    ciclo: '8–12 semanas, idealmente em jejum e antes de dormir (pico noturno de GH).',
+    aplicacao: 'Subcutâneo, longe das refeições (evitar carboidrato/gordura ~30 min antes/depois).',
+    sinergia: 'A dupla potencializa a liberação pulsátil de GH.',
+  },
+  'glp1': {
+    dosagem: 'Titulação gradual (ex.: semaglutida iniciando em 0,25 mg/semana e subindo conforme tolerância). USO COM PRESCRIÇÃO.',
+    ciclo: 'Uso semanal contínuo com acompanhamento médico e ajuste de dose.',
+    aplicacao: 'Subcutâneo, 1x por semana, no mesmo dia. Acompanhar efeitos gastrointestinais.',
+    sinergia: 'Combina com reeducação alimentar e treino de força.',
+  },
+  'aod-9604': {
+    dosagem: 'Faixa de referência: 300 mcg/dia, em jejum.',
+    ciclo: '12 semanas com reavaliação.',
+    aplicacao: 'Subcutâneo pela manhã, em jejum, para favorecer a lipólise.',
+  },
+  'pt-141': {
+    dosagem: 'Faixa de referência: 0,5–2 mg, conforme resposta, antes da atividade.',
+    ciclo: 'Uso pontual (sob demanda), respeitando intervalo entre doses.',
+    aplicacao: 'Subcutâneo cerca de 45 min antes. Começar pela menor dose para avaliar tolerância.',
+  },
+  'dsip': {
+    dosagem: 'Faixa de referência: 100–300 mcg antes de dormir.',
+    ciclo: 'Ciclos curtos para evitar tolerância; usar conforme necessidade.',
+    aplicacao: 'Subcutâneo à noite, 30–60 min antes de deitar.',
+  },
+  'semax': {
+    dosagem: 'Intranasal: 1–2 doses ao dia (Semax) / Selank conforme produto.',
+    ciclo: '2–4 semanas com pausas.',
+    aplicacao: 'Spray ou gotas intranasais; aplicar em narina limpa.',
+  },
+  'nad': {
+    dosagem: 'Subcutâneo 50–100 mg/dia ou conforme protocolo (IV exige ambiente clínico).',
+    ciclo: 'Ciclos de 2–4 semanas; manutenção conforme objetivo.',
+    aplicacao: 'Subcutâneo lento (pode causar desconforto se rápido). Hidratar bem.',
+  },
+}
+
 export const peptides: Peptide[] = [
   {
     id: 'bpc-157',
@@ -236,4 +302,15 @@ export const goalMeta: Record<
 
 export function getPeptide(id: string): Peptide | undefined {
   return peptides.find((p) => p.id === id)
+}
+
+export function getProtocolDetail(id: string): ProtocolDetail | undefined {
+  return protocolDetails[id]
+}
+
+// Une os peptídeos das dores selecionadas (primária + secundária), sem repetir.
+export function protocolForGoals(goals: Goal[]): Peptide[] {
+  const ids = new Set<string>()
+  goals.forEach((g) => goalMeta[g]?.protocolo.forEach((id) => ids.add(id)))
+  return [...ids].map(getPeptide).filter(Boolean) as Peptide[]
 }

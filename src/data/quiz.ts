@@ -13,6 +13,8 @@ export interface QuizQuestion {
   title: string
   subtitle?: string
   options: QuizOption[]
+  // quantas opções podem ser escolhidas (padrão 1)
+  maxSelect?: number
 }
 
 // Estrutura de quiz funnel (Russell Brunson): começa com a DOR principal,
@@ -21,7 +23,8 @@ export const quizQuestions: QuizQuestion[] = [
   {
     id: 'dor',
     title: 'Qual dessas situações mais te incomoda HOJE?',
-    subtitle: 'Seja honesto — é o primeiro passo para resolver de verdade.',
+    subtitle: 'Escolha até 2 — vamos montar um protocolo sob medida para você.',
+    maxSelect: 2,
     options: [
       { label: 'Gordura teimosa e fome que não controlo', emoji: '🔥', scores: { emagrecimento: 3 } },
       { label: 'Dor, lesão ou recuperação lenta', emoji: '🦾', scores: { recuperacao: 3 } },
@@ -77,13 +80,19 @@ export const quizQuestions: QuizQuestion[] = [
   },
 ]
 
-export function computeGoal(answers: Record<string, QuizOption>): Goal {
+// Agora cada resposta é uma lista de opções (perguntas multi-seleção).
+export function computeGoals(answers: Record<string, QuizOption[]>): Goal[] {
   const totals: Record<string, number> = {}
-  Object.values(answers).forEach((opt) => {
-    Object.entries(opt.scores).forEach(([goal, pts]) => {
-      totals[goal] = (totals[goal] || 0) + (pts || 0)
+  Object.values(answers).forEach((opts) => {
+    opts.forEach((opt) => {
+      Object.entries(opt.scores).forEach(([goal, pts]) => {
+        totals[goal] = (totals[goal] || 0) + (pts || 0)
+      })
     })
   })
-  const best = Object.entries(totals).sort((a, b) => b[1] - a[1])[0]
-  return (best?.[0] as Goal) || 'energia'
+  const ordered = Object.entries(totals)
+    .filter(([, v]) => v > 0)
+    .sort((a, b) => b[1] - a[1])
+    .map(([g]) => g as Goal)
+  return ordered.length ? ordered : ['energia']
 }
