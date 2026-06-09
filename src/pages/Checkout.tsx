@@ -1,13 +1,17 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { mainOffer, orderBump, brl, moneyBackDays } from '../data/offer'
+import { checkoutProduct, brl, moneyBackDays } from '../data/offer'
 import { loadFunnel, saveFunnel, loadConfig } from '../lib/store'
 
 export default function Checkout() {
   const nav = useNavigate()
+  const loc = useLocation()
   const state = loadFunnel()
   const cfg = loadConfig()
+  const { main: mainOffer, bump: orderBump, kind } = checkoutProduct(
+    new URLSearchParams(loc.search).get('p'),
+  )
   const [bump, setBump] = useState(false)
   const [method, setMethod] = useState<'pix' | 'card'>('pix')
   const [gateway, setGateway] = useState<'globalpay' | 'noxpay'>('globalpay')
@@ -19,7 +23,12 @@ export default function Checkout() {
     e.preventDefault()
     setProcessing(true)
     // Em produção, o "paid" deve ser definido pelo WEBHOOK do gateway, não aqui.
-    saveFunnel({ bump, paid: true })
+    if (kind === 'somnia') {
+      // comprou o relatório de sonhos; se levou o bump, libera também os peptídeos
+      saveFunnel({ bump, product: 'somnia', paidSomnia: true, ...(bump ? { paid: true } : {}) })
+    } else {
+      saveFunnel({ bump, product: 'peptides', paid: true })
+    }
     // Em produção: chamar API do gateway (Globalpay/Nox Pay) -> retorno -> webhook libera entrega.
     setTimeout(() => nav('/upsell'), 1400)
   }
@@ -32,7 +41,7 @@ export default function Checkout() {
       <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr]">
         {/* Formulário */}
         <form onSubmit={pay} className="rounded-3xl glass p-6 md:p-8">
-          <button type="button" onClick={() => nav('/resultado')} className="text-sm text-white/50 hover:text-white">← Voltar</button>
+          <button type="button" onClick={() => nav(kind === 'somnia' ? '/sonhos/analise' : '/resultado')} className="text-sm text-white/50 hover:text-white">← Voltar</button>
           <h1 className="mt-3 text-2xl font-black">Finalizar compra</h1>
 
           {/* Gateway */}

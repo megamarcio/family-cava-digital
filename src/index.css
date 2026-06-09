@@ -70,3 +70,39 @@
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- Tema SOMNIA (análise de sonhos) ---------- */
+.somnia-bg {
+  background:
+    radial-gradient(70% 55% at 50% -5%, rgba(139,92,246,.28), transparent 60%),
+    radial-gradient(60% 50% at 90% 20%, rgba(34,211,238,.16), transparent 55%),
+    radial-gradient(80% 60% at 10% 90%, rgba(99,102,241,.18), transparent 60%),
+    #070a1f;
+  color: #e6e9ff;
+}
+.glass-violet {
+  background: rgba(124,109,242,0.06);
+  border: 1px solid rgba(148,163,255,0.12);
+  backdrop-filter: blur(14px);
+}
+.somnia-gradient-text {
+  background: linear-gradient(100deg, #a78bfa, #22d3ee 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.btn-somnia {
+  background: linear-gradient(100deg, #8b5cf6, #22d3ee);
+  color: #060818;
+  font-weight: 800;
+  border-radius: 9999px;
+  transition: transform .15s ease, box-shadow .25s ease, filter .2s ease;
+  box-shadow: 0 14px 40px -12px rgba(34,211,238,.55);
+}
+.btn-somnia:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.06); }
+.btn-somnia:active { transform: translateY(0) scale(.99); }
+.somnia-glow { box-shadow: 0 0 0 1px rgba(139,92,246,.22), 0 30px 80px -30px rgba(139,92,246,.5); }
+
+@keyframes twinkle { 0%,100% { opacity:.25 } 50% { opacity:1 } }
+.twinkle { animation: twinkle 4s ease-in-out infinite; }
+

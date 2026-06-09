@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { upsell, downsell, brl } from '../data/offer'
-import { saveFunnel } from '../lib/store'
+import { saveFunnel, loadFunnel } from '../lib/store'
 import { useState } from 'react'
 
 export default function Upsell() {
@@ -11,11 +11,11 @@ export default function Upsell() {
 
   function accept() {
     saveFunnel({ upsell: true })
-    nav('/protocolo')
+    nav(loadFunnel().product === 'somnia' ? '/relatorio' : '/protocolo')
   }
   function decline() {
     if (!declined) setDeclined(true) // mostra downsell
-    else nav('/protocolo')
+    else nav(loadFunnel().product === 'somnia' ? '/relatorio' : '/protocolo')
   }
 
   return (

@@ -12,6 +12,8 @@ export interface FunnelState {
   bump?: boolean
   upsell?: boolean
   paid?: boolean
+  paidSomnia?: boolean
+  product?: 'peptides' | 'somnia'
 }
 
 export function loadFunnel(): FunnelState {

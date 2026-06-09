@@ -68,6 +68,44 @@ export const downsell: OfferItem = {
   bullets: ['Todos os stacks avançados em PDF', 'Atualizações por 12 meses'],
 }
 
+// ---------- Produto 2: Relatório SOMNIA (low ticket, estilo Thiago Roas) ----------
+export const dreamOffer: OfferItem = {
+  id: 'somnia-completo',
+  nome: 'Relatório SOMNIA Completo',
+  descricao:
+    'Sua leitura clínica detalhada + Plano de 7 dias para reduzir pesadelos e recuperar o sono REM + perfil emocional contínuo.',
+  preco: 19,
+  precoDe: 67,
+  bullets: [
+    'Leitura clínica detalhada do seu sonho (hipóteses por teoria psicológica)',
+    'Plano comportamental de 7 dias para dormir melhor (não medicamentoso)',
+    'Técnica IRT para reescrever pesadelos recorrentes',
+    'Perfil emocional contínuo e acompanhamento da intensidade',
+    'Acesso imediato e vitalício',
+  ],
+}
+
+// Order bump do SOMNIA = protocolo de peptídeos (venda casada estresse+sono)
+export const peptideBump: OfferItem = {
+  id: 'bump-protocolo-sono',
+  nome: 'Protocolo de Peptídeos — Sono & Estresse',
+  descricao:
+    'Ataque a causa fisiológica: Semax/Selank (estresse e foco) e DSIP (sono profundo) com dosagem, ciclo e aplicação.',
+  preco: 47,
+  precoDe: 197,
+  bullets: [
+    'Peptídeos do sono e do estresse com dosagem de referência',
+    'Ciclo, aplicação e sinergias passo a passo',
+    'Fornecedores confiáveis no Brasil e nos EUA',
+  ],
+}
+
+export type CheckoutKind = 'peptides' | 'somnia'
+export function checkoutProduct(p?: string | null): { main: OfferItem; bump: OfferItem; kind: CheckoutKind } {
+  if (p === 'somnia') return { main: dreamOffer, bump: peptideBump, kind: 'somnia' }
+  return { main: mainOffer, bump: orderBump, kind: 'peptides' }
+}
+
 export const moneyBackDays = 7
 
 export function brl(value: number): string {

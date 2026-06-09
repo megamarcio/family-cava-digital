@@ -75,6 +75,21 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* PONTE — app de sonhos (venda casada) */}
+      <section className="mx-auto max-w-6xl px-5 pt-12">
+        <motion.a href="/sonhos" {...fadeUp}
+          className="flex flex-col items-center justify-between gap-4 rounded-3xl border border-violet-400/20 bg-gradient-to-r from-violet-500/10 to-cyan-400/10 p-6 text-center sm:flex-row sm:text-left">
+          <div className="flex items-center gap-4">
+            <span className="text-3xl">🌙</span>
+            <div>
+              <h3 className="font-bold">Tem sonhos intensos, pesadelos ou sono ruim?</h3>
+              <p className="text-sm text-white/60">Descubra o que seu subconsciente está processando com o SOMNIA·AIX — e veja como o estresse afeta seu sono.</p>
+            </div>
+          </div>
+          <span className="shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-5 py-2 text-sm font-bold text-[#060818]">Analisar meu sonho →</span>
+        </motion.a>
+      </section>
+
       {/* DORES — descubra a sua */}
       <section id="como" className="mx-auto max-w-6xl px-5 py-20">
         <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">

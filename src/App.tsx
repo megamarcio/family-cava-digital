@@ -6,6 +6,9 @@ import Checkout from './pages/Checkout'
 import Upsell from './pages/Upsell'
 import Obrigado from './pages/Obrigado'
 import Protocolo from './pages/Protocolo'
+import SonhosLanding from './pages/SonhosLanding'
+import SonhosAnalise from './pages/SonhosAnalise'
+import Relatorio from './pages/Relatorio'
 import Admin from './pages/Admin'
 
 export default function App() {
@@ -20,6 +23,9 @@ export default function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/upsell" element={<Upsell />} />
         <Route path="/protocolo" element={<Protocolo />} />
+        <Route path="/sonhos" element={<SonhosLanding />} />
+        <Route path="/sonhos/analise" element={<SonhosAnalise />} />
+        <Route path="/relatorio" element={<Relatorio />} />
         <Route path="/obrigado" element={<Obrigado />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Landing />} />
