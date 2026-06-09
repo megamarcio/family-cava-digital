@@ -57,9 +57,19 @@ export default function Resultado() {
             {protocolo.map((p) => (
               <div key={p.id} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                 <div className="p-5">
-                  <div className="flex items-baseline justify-between">
-                    <h3 className="text-lg font-bold">{p.nome}</h3>
-                    <span className="text-[11px] text-white/40">{p.categoria}</span>
+                  <div className="flex items-baseline justify-between gap-2">
+                    {/* Nome OCULTO — revela "clique para desbloquear" no hover */}
+                    <button
+                      onClick={() => nav('/checkout')}
+                      title="Clique aqui pra desbloquear"
+                      className="group relative inline-flex items-center text-left"
+                    >
+                      <span aria-hidden className="select-none text-lg font-bold blur-[7px]">{p.nome}</span>
+                      <span className="absolute inset-0 z-10 hidden items-center justify-center gap-1 whitespace-nowrap rounded-lg bg-ink/85 px-3 text-xs font-bold text-lime-glow backdrop-blur transition group-hover:flex">
+                        🔒 Clique aqui pra desbloquear
+                      </span>
+                    </button>
+                    <span className="shrink-0 text-[11px] text-white/40">{p.categoria}</span>
                   </div>
                   <p className="mt-1 text-xs italic text-lime-glow">{p.tagline}</p>
                   {/* Primeiro benefício visível como "isca" */}
@@ -71,11 +81,11 @@ export default function Resultado() {
                     <p className="text-xs font-bold uppercase tracking-widest text-white/40">Dosagem & ciclo</p>
                     <p className="mt-1 text-sm text-white/70">250–500 mcg/dia · ciclo de 4–6 semanas · aplicação subcutânea passo a passo…</p>
                   </div>
-                  <div className="absolute inset-0 grid place-items-center">
-                    <span className="flex items-center gap-2 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
-                      🔒 Liberado após a compra
+                  <button onClick={() => nav('/checkout')} className="group absolute inset-0 grid place-items-center">
+                    <span className="flex items-center gap-2 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur transition group-hover:bg-lime-glow group-hover:text-ink">
+                      🔒 <span className="group-hover:hidden">Liberado após a compra</span><span className="hidden group-hover:inline">Clique aqui pra desbloquear</span>
                     </span>
-                  </div>
+                  </button>
                 </div>
               </div>
             ))}
