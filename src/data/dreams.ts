@@ -227,11 +227,149 @@ export function axisLabel(a: Axis): string {
 }
 
 export const dreamFeatures = [
-  { titulo: 'Análise estruturada', desc: 'Emoções, símbolos e temas extraídos do seu relato.' },
-  { titulo: 'Intensidade emocional', desc: 'Cada sonho recebe uma pontuação de 0 a 100.' },
-  { titulo: 'Padrões contínuos', desc: 'O sistema acumula um perfil emocional ao longo do tempo.' },
-  { titulo: 'Sem misticismo', desc: 'Linguagem clínica, analítica e hipotética — baseada em ciência.' },
+  { titulo: 'Quiz guiado', desc: 'Um fluxo interativo (com vídeo) que monta seu perfil sem você precisar escrever um texto perfeito.' },
+  { titulo: 'Intensidade emocional', desc: 'Cada sonho recebe uma pontuação de 0 a 100, calibrada por emoção e sono.' },
+  { titulo: 'Perfil contínuo', desc: 'O ONIRA acumula seus resultados e mostra a evolução do seu padrão emocional.' },
+  { titulo: 'Base científica', desc: 'Leitura clínica e hipotética — psicologia com dados, sem misticismo nem religião.' },
 ]
+
+// ---------- Quiz interativo (diferencial do ONIRA) ----------
+export interface DreamQuizOption {
+  label: string
+  emoji?: string
+  emocoes?: string[]
+  simbolo?: string
+  tema?: string
+  axis?: Axis
+  peso?: number
+  hipotese?: string
+  sleep?: number // contribui para o eixo sono (0-3)
+  stress?: number // contribui para o eixo estresse (0-3)
+}
+export interface DreamQuizQuestion {
+  id: string
+  title: string
+  subtitle?: string
+  maxSelect?: number
+  options: DreamQuizOption[]
+}
+
+export const dreamQuiz: DreamQuizQuestion[] = [
+  {
+    id: 'recordacao',
+    title: 'Com que frequência você lembra dos seus sonhos?',
+    options: [
+      { label: 'Quase toda noite', emoji: '🌙' },
+      { label: 'Algumas vezes por semana', emoji: '✨' },
+      { label: 'Raramente', emoji: '🌫️' },
+      { label: 'Só quando são muito intensos', emoji: '⚡' },
+    ],
+  },
+  {
+    id: 'emocao',
+    title: 'Qual emoção MAIS predomina nos seus sonhos?',
+    subtitle: 'Escolha até 2.',
+    maxSelect: 2,
+    options: [
+      { label: 'Medo', emoji: '😨', emocoes: ['medo'], axis: 'estresse', peso: 2 },
+      { label: 'Ansiedade', emoji: '😰', emocoes: ['ansiedade'], axis: 'estresse', peso: 2 },
+      { label: 'Tristeza', emoji: '😢', emocoes: ['tristeza'], axis: 'social', peso: 1 },
+      { label: 'Raiva', emoji: '😠', emocoes: ['raiva'], axis: 'estresse', peso: 1 },
+      { label: 'Confusão', emoji: '😵‍💫', emocoes: ['confusão'], axis: 'controle', peso: 1 },
+      { label: 'Euforia / alívio', emoji: '😌', emocoes: ['alívio'], axis: 'controle', peso: 0 },
+    ],
+  },
+  {
+    id: 'cena',
+    title: 'Qual cena se REPETE mais nos seus sonhos?',
+    subtitle: 'Escolha até 2.',
+    maxSelect: 2,
+    options: [
+      { label: 'Ser perseguido', emoji: '🏃', simbolo: 'Perseguição', tema: 'Ameaça & Evitação', axis: 'estresse', peso: 3, hipotese: 'Perseguição é o tema recorrente mais comum e, pela Teoria da Simulação de Ameaça, costuma refletir a evitação de uma situação ou emoção na vida desperta.' },
+      { label: 'Cair / despencar', emoji: '🕳️', simbolo: 'Queda', tema: 'Perda de Controle', axis: 'controle', peso: 2, hipotese: 'A sensação de queda associa-se a perda de controle ou medo de falhar, comum em transições, sobrecarga ou instabilidade financeira.' },
+      { label: 'Dentes caindo', emoji: '🦷', simbolo: 'Dentes caindo', tema: 'Autoimagem & Comunicação', axis: 'autoimagem', peso: 2, hipotese: 'Pesquisa associa o sonho com queda de dentes a níveis mais altos de ansiedade e neuroticismo, e a preocupações com aparência e comunicação.' },
+      { label: 'Prova / atraso', emoji: '⏰', simbolo: 'Prova / Desempenho', tema: 'Desempenho & Avaliação', axis: 'estresse', peso: 2, hipotese: 'Cenários de prova ou despreparo simulam avaliação e desempenho — típicos de estresse ocupacional ou pressão por entrega.' },
+      { label: 'Exposição / nudez', emoji: '🫣', simbolo: 'Exposição', tema: 'Exposição & Julgamento', axis: 'social', peso: 2, hipotese: 'Estar exposto em público remete a medo de julgamento e vulnerabilidade social, ligado a autoestima.' },
+      { label: 'Água / afogamento', emoji: '🌊', simbolo: 'Água / Afogamento', tema: 'Emoções Avassaladoras', axis: 'estresse', peso: 2, hipotese: 'Água em excesso costuma simbolizar emoções avassaladoras — metáfora de sobrecarga emocional não processada.' },
+      { label: 'Preso / paralisado', emoji: '⛓️', simbolo: 'Aprisionamento', tema: 'Aprisionamento & Impotência', axis: 'controle', peso: 3, hipotese: 'Sensação de estar preso ou paralisado reflete impotência diante de uma situação percebida como sem saída — alto marcador de estresse.' },
+      { label: 'Voando', emoji: '🕊️', simbolo: 'Voo', tema: 'Autonomia & Desejo', axis: 'controle', peso: 0, hipotese: 'Voar tem valência positiva: associa-se a desejo de autonomia, alívio e sensação de controle conquistado.' },
+      { label: 'Morte / perda', emoji: '🕯️', simbolo: 'Morte', tema: 'Transformação & Perda', axis: 'estresse', peso: 2, hipotese: 'A morte no sonho raramente é literal: costuma representar fim de ciclo e transformação.' },
+    ],
+  },
+  {
+    id: 'sono',
+    title: 'Como está a qualidade do seu sono ultimamente?',
+    options: [
+      { label: 'Durmo muito bem', emoji: '😴', sleep: 0 },
+      { label: 'Razoável', emoji: '🙂', sleep: 1 },
+      { label: 'Acordo cansado', emoji: '🥱', sleep: 2 },
+      { label: 'Insônia e/ou pesadelos', emoji: '😣', sleep: 3, axis: 'sono', peso: 3, simbolo: 'Sono fragmentado', tema: 'Qualidade do Sono', hipotese: 'Pesadelos e despertares indicam REM desregulado: cortisol alto deixa a amígdala hiperativa e o sono perde a função de “detox emocional”.' },
+    ],
+  },
+  {
+    id: 'estresse',
+    title: 'E o seu nível de estresse na vida desperta?',
+    options: [
+      { label: 'Baixo', emoji: '🟢', stress: 0 },
+      { label: 'Moderado', emoji: '🟡', stress: 1 },
+      { label: 'Alto', emoji: '🟠', stress: 2 },
+      { label: 'No limite', emoji: '🔴', stress: 3 },
+    ],
+  },
+]
+
+// Analisa o perfil do quiz (estruturado) + relato livre opcional.
+export function analyzeProfile(
+  selected: Record<string, DreamQuizOption[]>,
+  text: string,
+): DreamAnalysis {
+  const emo: Record<string, number> = {}
+  const simbolos: string[] = []
+  const temas: string[] = []
+  const hipoteses: string[] = []
+  const axes = axisInit()
+  let peso = 0
+
+  Object.values(selected).flat().forEach((o) => {
+    ;(o.emocoes || []).forEach((n) => (emo[n] = (emo[n] || 0) + (o.peso ?? 1)))
+    if (o.simbolo && !simbolos.includes(o.simbolo)) simbolos.push(o.simbolo)
+    if (o.tema && !temas.includes(o.tema)) temas.push(o.tema)
+    if (o.hipotese) hipoteses.push(o.hipotese)
+    if (o.axis) axes[o.axis] += o.peso ?? 1
+    if (o.sleep) { axes.sono += o.sleep; peso += o.sleep }
+    if (o.stress) { axes.estresse += o.stress; peso += o.stress }
+    peso += o.peso ?? 0
+  })
+
+  // funde com a análise do texto livre, se houver
+  if (text.trim().length >= 8) {
+    const t = analyzeDream(text)
+    t.simbolos.forEach((s) => !simbolos.includes(s) && simbolos.push(s))
+    t.temas.forEach((s) => !temas.includes(s) && temas.push(s))
+    t.hipoteses.forEach((h) => !hipoteses.includes(h) && hipoteses.push(h))
+    t.emocoes.forEach((e) => (emo[e.nome] = (emo[e.nome] || 0) + e.peso))
+    ;(Object.keys(axes) as Axis[]).forEach((k) => (axes[k] += t.axes[k]))
+    peso += t.intensidade / 12
+  }
+
+  const intensidade = Math.round(Math.min(100, Math.max(15, peso * 8)))
+  const emocoes = Object.entries(emo).map(([nome, p]) => ({ nome, peso: p })).sort((a, b) => b.peso - a.peso).slice(0, 5)
+  const domAxis = (Object.entries(axes).sort((a, b) => b[1] - a[1])[0]?.[0] as Axis) || 'estresse'
+
+  const recomenda = {
+    estresse: axes.estresse + axes.controle + axes.social + axes.autoimagem > 0 || intensidade >= 55,
+    sono: axes.sono > 0 || intensidade >= 70,
+  }
+  if (!recomenda.estresse && !recomenda.sono) recomenda.estresse = true
+
+  const resumo = `O eixo predominante do seu perfil é “${axisLabel(domAxis)}”. ${
+    intensidade >= 70 ? 'A carga emocional é alta — há material provavelmente não processado pelo seu sono REM.'
+    : intensidade >= 45 ? 'A carga emocional é moderada.'
+    : 'A carga emocional é relativamente baixa.'
+  }`
+
+  return { intensidade, emocoes, simbolos, temas, axes, hipoteses: hipoteses.slice(0, 4), resumo, recomenda }
+}
 
 // Seção educativa: déjà vu explicado pela ciência (sem nada esotérico).
 export const dejaVu = {
@@ -273,5 +411,5 @@ export const dreamDisclaimers = {
   curto:
     'Ferramenta educativa de autoconhecimento baseada em psicologia. Não é diagnóstico, terapia nem prescrição.',
   completo:
-    'O SOMNIA·AIX aplica teorias psicológicas validadas (Hipótese da Continuidade, Teoria da Simulação de Ameaça e processamento emocional em sono REM) para gerar HIPÓTESES sobre o conteúdo emocional dos seus sonhos. As leituras são probabilísticas e educativas — não constituem diagnóstico psicológico ou médico, não substituem acompanhamento profissional e não tratam transtornos do sono. Se você tem pesadelos frequentes, insônia persistente ou sofrimento significativo, procure um psicólogo ou médico. As indicações de peptídeos têm caráter informativo e exigem avaliação profissional.',
+    'O ONIRA aplica teorias psicológicas validadas (Hipótese da Continuidade, Teoria da Simulação de Ameaça e processamento emocional em sono REM) para gerar HIPÓTESES sobre o conteúdo emocional dos seus sonhos. As leituras são probabilísticas e educativas — não constituem diagnóstico psicológico ou médico, não substituem acompanhamento profissional e não tratam transtornos do sono. Se você tem pesadelos frequentes, insônia persistente ou sofrimento significativo, procure um psicólogo ou médico. As indicações de peptídeos têm caráter informativo e exigem avaliação profissional.',
 }

@@ -13,7 +13,7 @@ export default function Relatorio() {
 
   useEffect(() => {
     if (!state.paidSomnia) { nav('/sonhos/analise', { replace: true }); return }
-    try { setSaved(JSON.parse(localStorage.getItem('somnia_last') || 'null')) } catch { setSaved(null) }
+    try { setSaved(JSON.parse(localStorage.getItem('onira_last') || 'null')) } catch { setSaved(null) }
   }, [state.paidSomnia, nav])
 
   if (!state.paidSomnia) return null
@@ -73,7 +73,7 @@ export default function Relatorio() {
         </section>
 
         <p className="mt-8 text-center text-[11px] leading-relaxed text-white/40">{dreamDisclaimers.completo}</p>
-        <div className="mt-4 text-center"><Link to="/sonhos" className="text-sm text-white/50 hover:text-white">← Voltar ao SOMNIA·AIX</Link></div>
+        <div className="mt-4 text-center"><Link to="/sonhos" className="text-sm text-white/50 hover:text-white">← Voltar ao ONIRA</Link></div>
       </div>
     </main>
   )

@@ -130,7 +130,8 @@ export default function Admin() {
             <H title="Vídeos do funil" sub="Cole a URL do embed (YouTube/Vimeo) ou um .mp4. Sem URL, roda a simulação de demonstração." />
             <div className="grid gap-5">
               <Field label="VSL da Landing Page" value={cfg.vslUrl} onChange={(v) => setField({ vslUrl: v })} placeholder="https://www.youtube.com/embed/..." />
-              <Field label="Vídeo de abertura do Quiz" value={cfg.quizVideoUrl} onChange={(v) => setField({ quizVideoUrl: v })} placeholder="https://player.vimeo.com/video/..." />
+              <Field label="Vídeo de abertura do Quiz (peptídeos)" value={cfg.quizVideoUrl} onChange={(v) => setField({ quizVideoUrl: v })} placeholder="https://player.vimeo.com/video/..." />
+              <Field label="Vídeo de abertura do Quiz (ONIRA / sonhos)" value={cfg.oniraVideoUrl} onChange={(v) => setField({ oniraVideoUrl: v })} placeholder="https://www.youtube.com/embed/..." />
               <Field label="Vídeo de manipulação (página pós-compra)" value={cfg.manipulacaoVideoUrl} onChange={(v) => setField({ manipulacaoVideoUrl: v })} placeholder="https://www.youtube.com/embed/..." />
             </div>
             <p className="mt-4 text-xs text-white/40">Dica: para VSL, hospede em plataforma que mostre retenção (ex.: VTurb, Vimeo). O CTA aparece sozinho no tempo certo no player de demonstração.</p>

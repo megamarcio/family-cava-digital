@@ -70,8 +70,8 @@ export const downsell: OfferItem = {
 
 // ---------- Produto 2: Relatório SOMNIA (low ticket, estilo Thiago Roas) ----------
 export const dreamOffer: OfferItem = {
-  id: 'somnia-completo',
-  nome: 'Relatório SOMNIA Completo',
+  id: 'onira-completo',
+  nome: 'Relatório ONIRA Completo',
   descricao:
     'Sua leitura clínica detalhada + Plano de 7 dias para reduzir pesadelos e recuperar o sono REM + perfil emocional contínuo.',
   preco: 19,

@@ -26,12 +26,11 @@ export default function SonhosLanding() {
       {/* NAV */}
       <header className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
         <div className="flex items-center gap-2 font-extrabold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 text-[#060818]">◐</span>
-          <span>SOMNIA<span className="somnia-gradient-text">·AIX</span></span>
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 text-[#060818]">◓</span>
+          <span>ONIRA</span>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={start} className="btn-somnia px-5 py-2 text-sm">Começar grátis</button>
-          <button onClick={start} className="rounded-full glass-violet px-5 py-2 text-sm font-semibold text-white/80 hover:text-white">Login</button>
+          <button onClick={start} className="btn-somnia px-5 py-2 text-sm">Fazer o quiz grátis</button>
         </div>
       </header>
 
@@ -39,16 +38,16 @@ export default function SonhosLanding() {
       <section className="relative mx-auto max-w-3xl px-5 pb-10 pt-10 text-center md:pt-16">
         <motion.div {...fadeUp}>
           <span className="inline-flex items-center rounded-full glass-violet px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/70">
-            Motor de Análise Psicológica
+            Psicologia do sono · baseado em ciência
           </span>
           <h1 className="mt-6 text-5xl font-black leading-[0.98] md:text-7xl">
-            Seu subconsciente,<br /><span className="somnia-gradient-text">decodificado</span> em dados.
+            Seus sonhos viram um <span className="somnia-gradient-text">mapa</span> da sua mente.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/65">
-            O SOMNIA·AIX transforma relatos de sonhos em <strong className="text-white">emoções, símbolos, temas e padrões comportamentais</strong> — usando conceitos psicológicos reais. Comece grátis, 3 análises sem cadastro.
+            O ONIRA usa um <strong className="text-white">quiz guiado, com vídeo</strong>, e psicologia baseada em evidência para revelar as <strong className="text-white">emoções, símbolos e padrões</strong> por trás do que você sonha — e a relação com o seu estresse e o seu sono. Comece grátis, sem cadastro.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <button onClick={start} className="btn-somnia px-8 py-4 text-base">Começar grátis →</button>
+            <button onClick={start} className="btn-somnia px-8 py-4 text-base">Fazer o quiz grátis →</button>
             <a href="#recursos" className="rounded-full glass-violet px-8 py-4 text-sm font-semibold text-white/80 hover:text-white">Como funciona</a>
           </div>
         </motion.div>

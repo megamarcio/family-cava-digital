@@ -83,7 +83,7 @@ export default function Landing() {
             <span className="text-3xl">🌙</span>
             <div>
               <h3 className="font-bold">Tem sonhos intensos, pesadelos ou sono ruim?</h3>
-              <p className="text-sm text-white/60">Descubra o que seu subconsciente está processando com o SOMNIA·AIX — e veja como o estresse afeta seu sono.</p>
+              <p className="text-sm text-white/60">Faça o quiz do ONIRA e descubra o que sua mente processa enquanto dorme — e como o estresse afeta seu sono.</p>
             </div>
           </div>
           <span className="shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-5 py-2 text-sm font-bold text-[#060818]">Analisar meu sonho →</span>

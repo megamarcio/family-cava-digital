@@ -60,6 +60,7 @@ export interface AdminConfig {
   noxpayKey?: string
   vslUrl?: string
   quizVideoUrl?: string
+  oniraVideoUrl?: string
   manipulacaoVideoUrl?: string
   pixKey?: string
   whatsapp?: string
