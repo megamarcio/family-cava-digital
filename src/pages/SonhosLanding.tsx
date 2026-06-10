@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { dreamFeatures, dejaVu, dreamDisclaimers } from '../data/dreams'
+import EcosystemStrip from '../components/EcosystemStrip'
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -91,6 +92,8 @@ export default function SonhosLanding() {
           <button onClick={start} className="btn-somnia mt-5 px-7 py-3 text-sm">Analisar meu sonho agora →</button>
         </motion.div>
       </section>
+
+      <div className="relative"><EcosystemStrip current="onira" /></div>
 
       <footer className="relative border-t border-white/10 px-5 py-10">
         <div className="mx-auto max-w-2xl text-center text-xs leading-relaxed text-white/40">

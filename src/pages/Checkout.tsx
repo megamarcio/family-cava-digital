@@ -9,7 +9,7 @@ export default function Checkout() {
   const loc = useLocation()
   const state = loadFunnel()
   const cfg = loadConfig()
-  const { main: mainOffer, bump: orderBump, kind } = checkoutProduct(
+  const { main: mainOffer, bump: orderBump, kind, deliver, upsell } = checkoutProduct(
     new URLSearchParams(loc.search).get('p'),
   )
   const [bump, setBump] = useState(false)
@@ -17,20 +17,23 @@ export default function Checkout() {
   const [gateway, setGateway] = useState<'globalpay' | 'noxpay'>('globalpay')
   const [processing, setProcessing] = useState(false)
 
-  const total = mainOffer.preco + (bump ? orderBump.preco : 0)
+  const total = mainOffer.preco + (bump && orderBump ? orderBump.preco : 0)
 
   function pay(e: React.FormEvent) {
     e.preventDefault()
     setProcessing(true)
     // Em produção, o "paid" deve ser definido pelo WEBHOOK do gateway, não aqui.
-    if (kind === 'somnia') {
-      // comprou o relatório de sonhos; se levou o bump, libera também os peptídeos
-      saveFunnel({ bump, product: 'somnia', paidSomnia: true, ...(bump ? { paid: true } : {}) })
-    } else {
-      saveFunnel({ bump, product: 'peptides', paid: true })
-    }
+    const unlocked = { ...(state.unlocked || {}), [kind]: true }
+    // bundle libera todos os produtos do kit
+    if (kind === 'bundle') { unlocked.onira = true; unlocked.nidra = true; unlocked.lumen = true; unlocked.peptides = true }
+    const patch: Record<string, unknown> = { bump, product: kind, unlocked }
+    if (kind === 'peptides' || (kind === 'somnia' && bump) || kind === 'bundle') patch.paid = true
+    if (kind === 'somnia') patch.paidSomnia = true
+    // bump cruzado também desbloqueia o produto vizinho
+    if (bump && orderBump) unlocked[orderBump.id.replace('bump-', '')] = true
+    saveFunnel(patch)
     // Em produção: chamar API do gateway (Globalpay/Nox Pay) -> retorno -> webhook libera entrega.
-    setTimeout(() => nav('/upsell'), 1400)
+    setTimeout(() => nav(upsell ? '/upsell' : deliver), 1400)
   }
 
   const gatewayReady =
@@ -41,7 +44,7 @@ export default function Checkout() {
       <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr]">
         {/* Formulário */}
         <form onSubmit={pay} className="rounded-3xl glass p-6 md:p-8">
-          <button type="button" onClick={() => nav(kind === 'somnia' ? '/sonhos/analise' : '/resultado')} className="text-sm text-white/50 hover:text-white">← Voltar</button>
+          <button type="button" onClick={() => nav(-1)} className="text-sm text-white/50 hover:text-white">← Voltar</button>
           <h1 className="mt-3 text-2xl font-black">Finalizar compra</h1>
 
           {/* Gateway */}
@@ -95,22 +98,24 @@ export default function Checkout() {
             )}
           </div>
 
-          {/* ORDER BUMP */}
-          <motion.label
-            whileHover={{ scale: 1.01 }}
-            className={`mt-5 flex cursor-pointer gap-3 rounded-2xl border-2 border-dashed p-4 transition ${
-              bump ? 'border-lime-glow bg-lime-glow/10' : 'border-amber-300/40 bg-amber-300/5'
-            }`}>
-            <input type="checkbox" checked={bump} onChange={(e) => setBump(e.target.checked)} className="mt-1 h-5 w-5 accent-lime-glow" />
-            <div>
-              <div className="font-bold text-amber-200">⭐ SIM! Adicionar: {orderBump.nome}</div>
-              <p className="mt-1 text-sm text-white/70">{orderBump.descricao}</p>
-              <div className="mt-1 text-sm">
-                <span className="text-white/40 line-through">{brl(orderBump.precoDe!)}</span>{' '}
-                <strong className="text-lime-glow">+ {brl(orderBump.preco)}</strong>
+          {/* ORDER BUMP (opcional) */}
+          {orderBump && (
+            <motion.label
+              whileHover={{ scale: 1.01 }}
+              className={`mt-5 flex cursor-pointer gap-3 rounded-2xl border-2 border-dashed p-4 transition ${
+                bump ? 'border-lime-glow bg-lime-glow/10' : 'border-amber-300/40 bg-amber-300/5'
+              }`}>
+              <input type="checkbox" checked={bump} onChange={(e) => setBump(e.target.checked)} className="mt-1 h-5 w-5 accent-lime-glow" />
+              <div>
+                <div className="font-bold text-amber-200">⭐ SIM! Adicionar: {orderBump.nome}</div>
+                <p className="mt-1 text-sm text-white/70">{orderBump.descricao}</p>
+                <div className="mt-1 text-sm">
+                  <span className="text-white/40 line-through">{brl(orderBump.precoDe!)}</span>{' '}
+                  <strong className="text-lime-glow">+ {brl(orderBump.preco)}</strong>
+                </div>
               </div>
-            </div>
-          </motion.label>
+            </motion.label>
+          )}
 
           <button type="submit" disabled={processing} className="btn-primary mt-6 w-full px-6 py-5 text-lg disabled:opacity-60">
             {processing ? 'Processando pagamento…' : `PAGAR ${brl(total)} →`}
@@ -124,7 +129,7 @@ export default function Checkout() {
           <div className="mt-4 flex justify-between text-sm">
             <span>{mainOffer.nome}</span><span>{brl(mainOffer.preco)}</span>
           </div>
-          {bump && (
+          {bump && orderBump && (
             <div className="mt-2 flex justify-between text-sm text-lime-glow">
               <span>{orderBump.nome}</span><span>{brl(orderBump.preco)}</span>
             </div>

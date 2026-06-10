@@ -106,3 +106,26 @@
 @keyframes twinkle { 0%,100% { opacity:.25 } 50% { opacity:1 } }
 .twinkle { animation: twinkle 4s ease-in-out infinite; }
 
+/* ---------- Acento genérico por produto (usa --from / --to) ---------- */
+.btn-grad {
+  background: linear-gradient(100deg, var(--from, #8b5cf6), var(--to, #22d3ee));
+  color: #06080f;
+  font-weight: 800;
+  border-radius: 9999px;
+  transition: transform .15s ease, filter .2s ease;
+  box-shadow: 0 14px 40px -12px color-mix(in srgb, var(--to, #22d3ee) 60%, transparent);
+}
+.btn-grad:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.06); }
+.btn-grad:active { transform: translateY(0) scale(.99); }
+.grad-text {
+  background: linear-gradient(100deg, var(--from, #8b5cf6), var(--to, #22d3ee) 80%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.glass-soft {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(14px);
+}
+.grad-glow { box-shadow: 0 0 0 1px color-mix(in srgb, var(--from,#8b5cf6) 22%, transparent), 0 30px 80px -30px color-mix(in srgb, var(--from,#8b5cf6) 50%, transparent); }
+
+

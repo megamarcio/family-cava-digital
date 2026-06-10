@@ -13,7 +13,8 @@ export interface FunnelState {
   upsell?: boolean
   paid?: boolean
   paidSomnia?: boolean
-  product?: 'peptides' | 'somnia'
+  product?: 'peptides' | 'somnia' | 'nidra' | 'lumen' | 'bundle' | 'club'
+  unlocked?: Record<string, boolean>
 }
 
 export function loadFunnel(): FunnelState {

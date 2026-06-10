@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import VideoPlayer from '../components/VideoPlayer'
+import EcosystemStrip from '../components/EcosystemStrip'
 import { loadConfig } from '../lib/store'
 import { goalMeta } from '../data/peptides'
 
@@ -165,6 +166,8 @@ export default function Landing() {
           <button onClick={goQuiz} className="btn-primary mt-8 px-10 py-5 text-lg">Começar o quiz grátis →</button>
         </motion.div>
       </section>
+
+      <EcosystemStrip current="peptides" titulo="Faz parte do ecossistema Mente–Sono–Corpo" />
 
       {/* FOOTER + DISCLAIMER */}
       <footer className="border-t border-white/10 px-5 py-10">

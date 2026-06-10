@@ -100,10 +100,53 @@ export const peptideBump: OfferItem = {
   ],
 }
 
-export type CheckoutKind = 'peptides' | 'somnia'
-export function checkoutProduct(p?: string | null): { main: OfferItem; bump: OfferItem; kind: CheckoutKind } {
-  if (p === 'somnia') return { main: dreamOffer, bump: peptideBump, kind: 'somnia' }
-  return { main: mainOffer, bump: orderBump, kind: 'peptides' }
+// ---------- Demais produtos do ecossistema ----------
+export const nidraOffer: OfferItem = {
+  id: 'nidra', nome: 'NIDRA — Yoga Nidra & Sonho Lúcido', preco: 27, precoDe: 97,
+  descricao: '8 áudios guiados de Yoga Nidra + método de sonho lúcido para dormir profundo e acordar descansado.',
+  bullets: ['8 áudios de Yoga Nidra (10–40 min)', 'Método MILD de sonho lúcido', 'Trilha para insônia e descarga mental', 'Acesso vitalício'],
+}
+export const lumenOffer: OfferItem = {
+  id: 'lumen', nome: 'LUMEN — Luz & Cor para Sono e Humor', preco: 19, precoDe: 67,
+  descricao: 'Protocolo de luz circadiana e cor para regular seu relógio interno, melhorar o humor e dormir melhor.',
+  bullets: ['Protocolo de luz manhã/noite (circadiano)', 'Mapa de cores e ambiente para relaxar', 'Rotina anti-luz-azul', 'Acesso vitalício'],
+}
+export const bundleOffer: OfferItem = {
+  id: 'bundle', nome: 'NOITE PLENA — Kit Sono Profundo', preco: 67, precoDe: 133,
+  descricao: 'O ecossistema completo do sono num só lugar, com desconto: ONIRA + NIDRA + LUMEN + Peptídeos do Sono.',
+  bullets: ['Decodificador de Sonhos (ONIRA)', 'Yoga Nidra & Sonho Lúcido (NIDRA)', 'Luz & Cor (LUMEN)', 'Protocolo de Peptídeos do Sono', 'Economia de mais de R$60'],
+}
+export const clubOffer: OfferItem = {
+  id: 'club', nome: 'CÍRCULO — Clube Mente-Sono', preco: 29, precoDe: 79,
+  descricao: 'Assinatura mensal: relatórios ilimitados, áudios novos toda semana, perfil contínuo, comunidade e descontos.',
+  bullets: ['Relatórios ONIRA ilimitados', 'Áudios novos toda semana', 'Comunidade + lives', 'Descontos nos protocolos', 'Cancele quando quiser'],
+}
+
+// bumps cruzados (venda casada)
+export const nidraBump: OfferItem = {
+  id: 'bump-nidra', nome: 'Áudio extra: Yoga Nidra para Insônia (NIDRA)', preco: 17, precoDe: 47,
+  descricao: 'Sessão guiada de 30 min para desligar a mente e adormecer rápido.',
+  bullets: ['Áudio de 30 min', 'Técnica de respiração 4-7-8 guiada'],
+}
+export const lumenBump: OfferItem = {
+  id: 'bump-lumen', nome: 'Trilha de Luz & Cor para dormir (LUMEN)', preco: 17, precoDe: 47,
+  descricao: 'Mini-protocolo de luz e cor para preparar o quarto e o cérebro para o sono.',
+  bullets: ['Rotina de 7 minutos antes de dormir', 'Guia de cores e temperatura de luz'],
+}
+
+export type CheckoutKind = 'peptides' | 'somnia' | 'nidra' | 'lumen' | 'bundle' | 'club'
+
+interface CheckoutCfg { main: OfferItem; bump?: OfferItem; kind: CheckoutKind; deliver: string; upsell: boolean }
+
+export function checkoutProduct(p?: string | null): CheckoutCfg {
+  switch (p) {
+    case 'somnia': return { main: dreamOffer, bump: peptideBump, kind: 'somnia', deliver: '/relatorio', upsell: true }
+    case 'nidra': return { main: nidraOffer, bump: lumenBump, kind: 'nidra', deliver: '/entrega', upsell: false }
+    case 'lumen': return { main: lumenOffer, bump: nidraBump, kind: 'lumen', deliver: '/entrega', upsell: false }
+    case 'bundle': return { main: bundleOffer, bump: undefined, kind: 'bundle', deliver: '/entrega', upsell: false }
+    case 'club': return { main: clubOffer, bump: undefined, kind: 'club', deliver: '/entrega', upsell: false }
+    default: return { main: mainOffer, bump: orderBump, kind: 'peptides', deliver: '/protocolo', upsell: true }
+  }
 }
 
 export const moneyBackDays = 7

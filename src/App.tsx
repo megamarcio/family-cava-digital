@@ -9,6 +9,11 @@ import Protocolo from './pages/Protocolo'
 import SonhosLanding from './pages/SonhosLanding'
 import SonhosAnalise from './pages/SonhosAnalise'
 import Relatorio from './pages/Relatorio'
+import Nidra from './pages/Nidra'
+import Lumen from './pages/Lumen'
+import NoitePlena from './pages/NoitePlena'
+import Circulo from './pages/Circulo'
+import Entrega from './pages/Entrega'
 import Admin from './pages/Admin'
 
 export default function App() {
@@ -26,6 +31,11 @@ export default function App() {
         <Route path="/sonhos" element={<SonhosLanding />} />
         <Route path="/sonhos/analise" element={<SonhosAnalise />} />
         <Route path="/relatorio" element={<Relatorio />} />
+        <Route path="/nidra" element={<Nidra />} />
+        <Route path="/lumen" element={<Lumen />} />
+        <Route path="/noite-plena" element={<NoitePlena />} />
+        <Route path="/circulo" element={<Circulo />} />
+        <Route path="/entrega" element={<Entrega />} />
         <Route path="/obrigado" element={<Obrigado />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Landing />} />
