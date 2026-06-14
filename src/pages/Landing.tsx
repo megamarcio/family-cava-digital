@@ -24,7 +24,7 @@ export default function Landing() {
       {/* NAV */}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5">
         <div className="flex items-center gap-2 font-extrabold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-emerald-glow to-lime-glow text-ink">P</span>
+          <img src="/brand/pp-icon.png" alt="Protocolo Peptídeos" className="h-9 w-9 rounded-lg object-cover" />
           <span>Protocolo<span className="gradient-text">Peptídeos</span></span>
         </div>
         <button onClick={goQuiz} className="btn-primary px-5 py-2 text-sm">Fazer o quiz grátis</button>
