@@ -23,69 +23,82 @@ export interface Peptide {
   goals: Goal[]
 }
 
-// Detalhes do protocolo — conteúdo PREMIUM, liberado apenas após o pagamento.
-// Valores de referência citados na literatura/comunidade; NÃO são prescrição.
+// Conteúdo PREMIUM 100% EDUCATIVO — liberado após o pagamento.
+// SEM posologia e SEM instrução de aplicação. Objetivo: entender a ciência,
+// o status regulatório e o que conversar com um profissional de saúde.
 export interface ProtocolDetail {
-  dosagem: string
-  ciclo: string
-  aplicacao: string
-  sinergia?: string
+  oQueCiencia: string // o que a ciência diz (mecanismo e nível de evidência)
+  numeros: string // números/achados relevantes de estudos
+  statusRegulatorio: string // aprovação/uso investigacional/pesquisa
+  oQuePerguntar: string // o que perguntar ao seu médico/profissional
 }
 
 export const protocolDetails: Record<string, ProtocolDetail> = {
+  retatrutida: {
+    oQueCiencia: 'Agonista TRIPLO dos receptores de GIP, GLP-1 e glucagon. A combinação atua no apetite, no esvaziamento gástrico e também no gasto energético (via glucagon) — por isso é estudada como a próxima geração de medicamentos para obesidade.',
+    numeros: 'Em ensaio de Fase 2, perda de peso média de ~24% em 48 semanas na maior dose. O programa de Fase 3 (TRIUMPH) reporta resultados na faixa de ~28%, entre os maiores já observados na classe.',
+    statusRegulatorio: 'INVESTIGACIONAL — ainda NÃO aprovada por agências regulatórias. Em estudos clínicos de Fase 3; segurança e eficácia de longo prazo ainda sendo estabelecidas.',
+    oQuePerguntar: 'Pergunte ao seu médico sobre o estágio dos estudos, riscos conhecidos, alternativas já aprovadas e se faz sentido aguardar a aprovação regulatória.',
+  },
   'bpc-157': {
-    dosagem: 'Faixa de referência: 250–500 mcg por dia (subcutâneo), próximo à região da lesão quando possível.',
-    ciclo: '4 a 6 semanas de uso contínuo, seguidas de pausa. Reavaliar conforme evolução.',
-    aplicacao: 'Reconstituir o liofilizado com água bacteriostática, aplicar subcutâneo com seringa de insulina. Rotacionar o local.',
-    sinergia: 'Combina com TB-500 (stack "Wolverine") para recuperação acelerada.',
+    oQueCiencia: 'Peptídeo de 15 aminoácidos derivado de proteína gástrica. Em modelos pré-clínicos, associa-se a angiogênese (novos vasos) e migração celular, com sinais de reparo de tendões, ligamentos e mucosa intestinal.',
+    numeros: 'A maior parte das evidências vem de estudos em animais; ensaios clínicos robustos em humanos ainda são escassos.',
+    statusRegulatorio: 'Não aprovado como medicamento; comercializado em grande parte para fins de pesquisa. Status varia por país.',
+    oQuePerguntar: 'Pergunte sobre a ausência de dados humanos de longo prazo, qualidade/pureza de fontes e se há terapias aprovadas para o seu caso.',
   },
   'tb-500': {
-    dosagem: 'Fase de carga: 2–2,5 mg, 2x/semana por 4–6 semanas. Manutenção: 2–2,5 mg a cada 1–2 semanas.',
-    ciclo: 'Carga de 4–6 semanas e depois manutenção. Pausar e reavaliar.',
-    aplicacao: 'Subcutâneo ou intramuscular após reconstituição com água bacteriostática.',
-    sinergia: 'Clássico com BPC-157 para reparo sistêmico.',
+    oQueCiencia: 'Relacionado à timosina β4; estudado por favorecer angiogênese e migração celular e por modular fibrose e inflamação, com efeito sistêmico de reparo em modelos pré-clínicos.',
+    numeros: 'Evidência majoritariamente pré-clínica; faltam ensaios controlados em humanos.',
+    statusRegulatorio: 'Não aprovado para uso clínico; uso de pesquisa. Proibido no esporte (lista WADA).',
+    oQuePerguntar: 'Pergunte sobre riscos desconhecidos em humanos, implicações antidoping e opções com respaldo clínico.',
   },
   'ghk-cu': {
-    dosagem: 'Tópico (séruns 1–3%) para pele; injetável 1–2 mg/dia em protocolos avançados.',
-    ciclo: 'Tópico: uso contínuo. Injetável: ciclos de 4–8 semanas.',
-    aplicacao: 'Tópico no rosto/couro cabeludo limpo; injetável subcutâneo após reconstituição.',
+    oQueCiencia: 'Peptídeo de cobre presente naturalmente no corpo, com longo histórico de pesquisa em remodelamento da pele, sinalização de colágeno e reparo tecidual.',
+    numeros: 'Um dos peptídeos com mais estudos em pele, sobretudo em formulações tópicas (cosméticas).',
+    statusRegulatorio: 'Amplamente usado em cosméticos tópicos; usos injetáveis não são aprovados como medicamento.',
+    oQuePerguntar: 'Pergunte ao dermatologista sobre formulações tópicas com evidência e expectativas realistas de resultado.',
   },
   'cjc-ipa': {
-    dosagem: 'CJC-1295 (no DAC) 100 mcg + Ipamorelina 100–200 mcg, 1–2x/dia.',
-    ciclo: '8–12 semanas, idealmente em jejum e antes de dormir (pico noturno de GH).',
-    aplicacao: 'Subcutâneo, longe das refeições (evitar carboidrato/gordura ~30 min antes/depois).',
-    sinergia: 'A dupla potencializa a liberação pulsátil de GH.',
+    oQueCiencia: 'CJC-1295 e Ipamorelina são secretagogos que estimulam a liberação pulsátil de GH e IGF-1 pela hipófise, imitando o ritmo fisiológico.',
+    numeros: 'Estudos em humanos com CJC-1295 mostraram aumentos de GH de 2–10x e de IGF-1 por vários dias; dados de desfechos clínicos de longo prazo são limitados.',
+    statusRegulatorio: 'Não aprovados para uso estético/performance; uso de pesquisa. Restritos no esporte.',
+    oQuePerguntar: 'Pergunte sobre riscos do eixo de GH (incluindo proliferação celular), monitorização e alternativas aprovadas.',
   },
-  'glp1': {
-    dosagem: 'Titulação gradual (ex.: semaglutida iniciando em 0,25 mg/semana e subindo conforme tolerância). USO COM PRESCRIÇÃO.',
-    ciclo: 'Uso semanal contínuo com acompanhamento médico e ajuste de dose.',
-    aplicacao: 'Subcutâneo, 1x por semana, no mesmo dia. Acompanhar efeitos gastrointestinais.',
-    sinergia: 'Combina com reeducação alimentar e treino de força.',
+  glp1: {
+    oQueCiencia: 'Agonistas de GLP-1 (e também de GIP, no caso da tirzepatida) que regulam apetite, esvaziamento gástrico e controle glicêmico — a classe mais validada para perda de peso.',
+    numeros: 'Ensaios de Fase 3 mostram perdas de peso significativas (frequentemente ~15% com semaglutida e ~20% com tirzepatida, conforme estudo e dose).',
+    statusRegulatorio: 'APROVADOS por agências regulatórias para diabetes e/ou obesidade. Uso exige PRESCRIÇÃO e acompanhamento médico.',
+    oQuePerguntar: 'Pergunte se você é candidato, sobre efeitos gastrointestinais, contraindicações e acompanhamento adequado.',
   },
   'aod-9604': {
-    dosagem: 'Faixa de referência: 300 mcg/dia, em jejum.',
-    ciclo: '12 semanas com reavaliação.',
-    aplicacao: 'Subcutâneo pela manhã, em jejum, para favorecer a lipólise.',
+    oQueCiencia: 'Fragmento da molécula de GH estudado por estimular lipólise sem os efeitos sobre glicemia do GH completo.',
+    numeros: 'Resultados em humanos foram mistos e, em estudos, sem superioridade consistente sobre placebo para perda de peso.',
+    statusRegulatorio: 'Não aprovado como medicamento de emagrecimento; uso de pesquisa.',
+    oQuePerguntar: 'Pergunte sobre a fragilidade da evidência e por que opções aprovadas costumam ser preferíveis.',
   },
   'pt-141': {
-    dosagem: 'Faixa de referência: 0,5–2 mg, conforme resposta, antes da atividade.',
-    ciclo: 'Uso pontual (sob demanda), respeitando intervalo entre doses.',
-    aplicacao: 'Subcutâneo cerca de 45 min antes. Começar pela menor dose para avaliar tolerância.',
+    oQueCiencia: 'Bremelanotida age no sistema nervoso central via receptores de melanocortina, atuando sobre o desejo sexual — mecanismo central, diferente de fármacos vasculares.',
+    numeros: 'Ensaios clínicos embasaram aprovação para desejo sexual hipoativo feminino em alguns países.',
+    statusRegulatorio: 'A bremelanotida é APROVADA em alguns países (ex.: EUA) para uma indicação específica; outros usos não são aprovados.',
+    oQuePerguntar: 'Pergunte sobre indicação aprovada, efeitos colaterais (náusea, pressão) e adequação ao seu caso.',
   },
-  'dsip': {
-    dosagem: 'Faixa de referência: 100–300 mcg antes de dormir.',
-    ciclo: 'Ciclos curtos para evitar tolerância; usar conforme necessidade.',
-    aplicacao: 'Subcutâneo à noite, 30–60 min antes de deitar.',
+  dsip: {
+    oQueCiencia: 'Peptídeo indutor de sono delta, estudado por modular o ciclo do sono e a resposta ao estresse.',
+    numeros: 'Evidência inicial e heterogênea; faltam ensaios amplos e bem controlados em humanos.',
+    statusRegulatorio: 'Não aprovado como medicamento; uso de pesquisa.',
+    oQuePerguntar: 'Pergunte sobre causas tratáveis da insônia e abordagens com evidência (ex.: TCC-I) antes de qualquer composto.',
   },
-  'semax': {
-    dosagem: 'Intranasal: 1–2 doses ao dia (Semax) / Selank conforme produto.',
-    ciclo: '2–4 semanas com pausas.',
-    aplicacao: 'Spray ou gotas intranasais; aplicar em narina limpa.',
+  semax: {
+    oQueCiencia: 'Semax e Selank são peptídeos nootrópicos: Semax associado a foco e neuroproteção; Selank a redução de ansiedade e estabilidade de humor.',
+    numeros: 'Uso clínico documentado principalmente na Rússia; pesquisa ocidental ainda limitada.',
+    statusRegulatorio: 'Aprovados em alguns países (ex.: Rússia); não aprovados na maior parte do mundo — uso de pesquisa.',
+    oQuePerguntar: 'Pergunte sobre a base de evidência fora da Rússia e alternativas validadas para foco/ansiedade.',
   },
-  'nad': {
-    dosagem: 'Subcutâneo 50–100 mg/dia ou conforme protocolo (IV exige ambiente clínico).',
-    ciclo: 'Ciclos de 2–4 semanas; manutenção conforme objetivo.',
-    aplicacao: 'Subcutâneo lento (pode causar desconforto se rápido). Hidratar bem.',
+  nad: {
+    oQueCiencia: 'NAD+ é coenzima central no metabolismo energético mitocondrial e em processos de reparo do DNA, que declina com a idade.',
+    numeros: 'Interesse crescente em longevidade; desfechos clínicos em humanos ainda em investigação.',
+    statusRegulatorio: 'Vendido como suplemento/uso de pesquisa; não é medicamento aprovado para tratar doenças.',
+    oQuePerguntar: 'Pergunte sobre evidência real para o seu objetivo e expectativas realistas.',
   },
 }
 
@@ -151,6 +164,22 @@ export const peptides: Peptide[] = [
     evidencia:
       'Ensaios em humanos para CJC-1295. Peptídeos de GH exigem cautela e acompanhamento.',
     goals: ['recuperacao', 'energia', 'sono'],
+  },
+  {
+    id: 'retatrutida',
+    nome: 'Retatrutida',
+    tagline: 'O agonista triplo',
+    categoria: 'Emagrecimento & Metabolismo',
+    comoFunciona:
+      'Agonista TRIPLO dos receptores de GIP, GLP-1 e glucagon. Além de reduzir o apetite, ativa também o gasto energético via glucagon — por isso é estudada como a próxima geração para obesidade.',
+    beneficios: [
+      'Atua em três vias metabólicas ao mesmo tempo',
+      'Maiores perdas de peso já observadas na classe (em estudos)',
+      'Investigada também para esteatose hepática',
+    ],
+    evidencia:
+      'Fase 2 com ~24% de perda de peso em 48 semanas; programa de Fase 3 (TRIUMPH) reportando ~28%. Ainda INVESTIGACIONAL e NÃO aprovada.',
+    goals: ['emagrecimento'],
   },
   {
     id: 'glp1',
@@ -252,7 +281,7 @@ export const goalMeta: Record<
   emagrecimento: {
     label: 'Emagrecimento & Metabolismo',
     dor: 'A balança não se mexe, a fome aperta à noite e a gordura teimosa não vai embora — mesmo com dieta.',
-    protocolo: ['glp1', 'aod-9604'],
+    protocolo: ['retatrutida', 'glp1', 'aod-9604'],
     cor: '#34d399',
     emoji: '🔥',
   },

@@ -42,10 +42,10 @@ export default function Protocolo() {
           </p>
         </motion.div>
 
-        {/* VÍDEO de manipulação */}
+        {/* VÍDEO: interpretação do relatório */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="mt-8">
-          <h2 className="mb-3 text-xl font-bold">🎬 Como manipular peptídeos com segurança</h2>
-          <VideoPlayer src={cfg.manipulacaoVideoUrl} title="Aula: manipulação de peptídeos" />
+          <h2 className="mb-3 text-xl font-bold">🎬 Como interpretar seu relatório</h2>
+          <VideoPlayer src={cfg.manipulacaoVideoUrl} title="Aula: como interpretar seu relatório" />
           {!cfg.manipulacaoVideoUrl && (
             <p className="mt-2 text-xs text-white/40">O vídeo da aula será exibido aqui assim que configurado no Admin → Entrega.</p>
           )}
@@ -67,10 +67,10 @@ export default function Protocolo() {
                   <p className="mt-3 text-sm text-white/70">{p.comoFunciona}</p>
                   {d && (
                     <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                      <Detail label="Dosagem (referência)" value={d.dosagem} />
-                      <Detail label="Ciclo" value={d.ciclo} />
-                      <Detail label="Aplicação" value={d.aplicacao} />
-                      {d.sinergia && <Detail label="Sinergia" value={d.sinergia} />}
+                      <Detail label="O que a ciência diz" value={d.oQueCiencia} />
+                      <Detail label="Números dos estudos" value={d.numeros} />
+                      <Detail label="Status regulatório" value={d.statusRegulatorio} />
+                      <Detail label="O que perguntar ao médico" value={d.oQuePerguntar} />
                     </div>
                   )}
                   <p className="mt-3 text-[11px] text-white/40">Evidência: {p.evidencia}</p>
@@ -89,15 +89,15 @@ export default function Protocolo() {
           </div>
         </motion.section>
 
-        {/* SEGURANÇA */}
+        {/* SEGURANÇA & DECISÃO INFORMADA */}
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
           className="mt-10 rounded-2xl border border-amber-300/30 bg-amber-300/5 p-5 text-sm text-white/70">
-          <div className="font-bold text-amber-200">⚠️ Checklist de segurança</div>
+          <div className="font-bold text-amber-200">⚠️ Como usar este material com segurança</div>
           <ul className="mt-2 list-disc space-y-1 pl-5">
-            <li>Confirme a pureza do produto (laudo HPLC) antes de usar.</li>
-            <li>Use sempre material estéril e água bacteriostática para reconstituição.</li>
-            <li>Comece pela menor dose para avaliar tolerância.</li>
-            <li>Conteúdo educativo — valide o protocolo com um profissional de saúde.</li>
+            <li>Este conteúdo é educativo: ele te prepara para uma conversa qualificada com um profissional de saúde.</li>
+            <li>Verifique o status regulatório de cada substância no seu país — muitas são apenas investigacionais ou de pesquisa.</li>
+            <li>Não há aqui posologia nem instrução de uso: dose, indicação e acompanhamento são decisões médicas.</li>
+            <li>Desconfie de promessas milagrosas e priorize opções com evidência clínica e aprovação regulatória.</li>
           </ul>
         </motion.section>
 
