@@ -284,6 +284,8 @@ function computeBucket(answers) {
 - Backend: doc sugere Supabase + Edge Functions + Resend; hoje é front-only/localStorage. Migrar ao ativar pagamento real, captura de lead persistente e e-mails por bucket.
 - Buckets: doc propõe perfis NEUTROS (performance/energia/longevidade/estética/iniciante). O funil atual usa dores (emagrecimento/recuperação/energia/pele/libido/sono/cognição). Para o ANÚNCIO e a Landing pública, migrar para os perfis neutros (compliance §0/§0.1); a copy mais forte pode ficar DENTRO do quiz.
 
+**Inteligência competitiva:** ver `docs/concorrentes.md` (análise do concorrente "Protocolos de Peptídeos Brasil" — protocolo.reisweb.com.br). Confirma a tese: enquadramento educacional passa no Meta; o QUIZ é nossa vantagem (ele não tem); riscos dele = "emagrecimento" + nomes de GLP-1 no criativo (manter fora do nosso AD).
+
 **⚠️ AÇÕES DE COMPLIANCE PENDENTES (alta prioridade, §0/§0.1):**
 1. Reescrever a copy "ad-facing" (hero da Landing pública) — hoje diz "qual peptídeo o seu corpo está pedindo / raiz do seu problema / protocolo exato" = ALTO RISCO de ban. Migrar para curiosidade/educação + perfis neutros.
 2. Garantir URLs e nomes de eventos 100% NEUTROS (`/quiz`, `/resultado`, `/guia`; `QuizStart`, `QuizComplete`, `Lead`, `Purchase`). Evitar slugs como `/quiz/gordura-teimosa`.
