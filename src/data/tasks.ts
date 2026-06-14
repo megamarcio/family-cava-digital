@@ -41,7 +41,7 @@ export const taskGroups: TaskGroup[] = [
     descricao: 'A VSL e o vídeo do quiz são os maiores alavancadores de conversão.',
     tarefas: [
       { id: 'c1', titulo: 'Gravar/gerar a VSL (vídeo de vendas)', detalhe: 'Roteiro: Gancho → Dor → História → Mecanismo (peptídeos) → Oferta → Prova → CTA. ~6-9 min.' },
-      { id: 'c2', titulo: 'Gravar vídeo de abertura do quiz', detalhe: '30-45s: "Responda 5 perguntas e eu te digo qual protocolo seu corpo está pedindo".' },
+      { id: 'c2', titulo: 'Gravar vídeo de abertura do quiz', detalhe: '30-45s: "Responda 6 perguntas e receba um guia educativo sobre as categorias de peptídeos" (enquadramento educativo/compliant).' },
       { id: 'c3', titulo: 'Substituir vídeos placeholder', detalhe: 'Trocar o ID/URL dos players no Admin → aba Vídeos.' },
       { id: 'c4', titulo: 'Coletar 3-5 provas/depoimentos', detalhe: 'Prints, áudios ou vídeos. Prova social é o que derruba a objeção final.' },
     ],

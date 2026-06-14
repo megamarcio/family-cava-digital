@@ -276,7 +276,7 @@ export const peptides: Peptide[] = [
 
 export const goalMeta: Record<
   Goal,
-  { label: string; dor: string; protocolo: string[]; cor: string; emoji: string; img: string }
+  { label: string; dor: string; protocolo: string[]; cor: string; emoji: string; img: string; objetivo: string; publicDesc: string }
 > = {
   emagrecimento: {
     label: 'Emagrecimento & Metabolismo',
@@ -284,6 +284,7 @@ export const goalMeta: Record<
     protocolo: ['retatrutida', 'glp1', 'aod-9604'],
     cor: '#34d399',
     emoji: '🔥', img: '/dores/emagrecimento.webp',
+    objetivo: 'Composição Corporal & Metabolismo', publicDesc: 'Categorias de peptídeos estudadas no contexto de metabolismo e composição corporal.',
   },
   recuperacao: {
     label: 'Recuperação & Lesões',
@@ -291,6 +292,7 @@ export const goalMeta: Record<
     protocolo: ['bpc-157', 'tb-500'],
     cor: '#22d3ee',
     emoji: '🦾', img: '/dores/recuperacao.webp',
+    objetivo: 'Performance & Recuperação', publicDesc: 'Peptídeos pesquisados no contexto de performance física e recuperação.',
   },
   energia: {
     label: 'Energia & Disposição',
@@ -298,6 +300,7 @@ export const goalMeta: Record<
     protocolo: ['nad', 'cjc-ipa'],
     cor: '#a3e635',
     emoji: '⚡', img: '/dores/energia.webp',
+    objetivo: 'Energia & Disposição', publicDesc: 'Compostos estudados em relação a energia, disposição e metabolismo celular.',
   },
   pele: {
     label: 'Pele, Cabelo & Estética',
@@ -305,6 +308,7 @@ export const goalMeta: Record<
     protocolo: ['ghk-cu'],
     cor: '#f472b6',
     emoji: '✨', img: '/dores/pele.webp',
+    objetivo: 'Estética & Pele', publicDesc: 'Peptídeos pesquisados para pele, colágeno e estética.',
   },
   libido: {
     label: 'Libido & Vitalidade',
@@ -312,6 +316,7 @@ export const goalMeta: Record<
     protocolo: ['pt-141'],
     cor: '#fb7185',
     emoji: '❤️‍🔥', img: '/dores/libido.webp',
+    objetivo: 'Vitalidade & Bem-estar', publicDesc: 'Categoria estudada no contexto de vitalidade e bem-estar geral.',
   },
   sono: {
     label: 'Sono & Estresse',
@@ -319,6 +324,7 @@ export const goalMeta: Record<
     protocolo: ['dsip', 'cjc-ipa'],
     cor: '#818cf8',
     emoji: '🌙', img: '/dores/sono.webp',
+    objetivo: 'Sono & Relaxamento', publicDesc: 'Compostos estudados no contexto de sono e relaxamento.',
   },
   cognitivo: {
     label: 'Foco & Cognição',
@@ -326,6 +332,7 @@ export const goalMeta: Record<
     protocolo: ['semax', 'nad'],
     cor: '#60a5fa',
     emoji: '🧠', img: '/dores/cognitivo.webp',
+    objetivo: 'Foco & Cognição', publicDesc: 'Peptídeos nootrópicos estudados em relação a foco e cognição.',
   },
 }
 

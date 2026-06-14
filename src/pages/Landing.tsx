@@ -17,7 +17,7 @@ export default function Landing() {
   const cfg = loadConfig()
   const goQuiz = () => nav('/quiz')
 
-  const dores = Object.entries(goalMeta)
+  const categorias = Object.entries(goalMeta)
 
   return (
     <main className="mesh">
@@ -30,23 +30,23 @@ export default function Landing() {
         <button onClick={goQuiz} className="btn-primary px-5 py-2 text-sm">Fazer o quiz grátis</button>
       </header>
 
-      {/* HERO */}
+      {/* HERO — enquadramento educativo/curiosidade (compliant Meta) */}
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-8 md:grid-cols-2 md:pt-12">
         <motion.div {...fadeUp}>
           <span className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs font-medium text-lime-glow">
-            🧬 Baseado em ciência • Protocolo personalizado
+            🧬 Conteúdo educativo • Baseado em ciência
           </span>
           <h1 className="mt-5 text-4xl font-black leading-[1.05] md:text-6xl">
-            Descubra qual <span className="gradient-text">peptídeo</span> o seu corpo está pedindo
+            Qual categoria de <span className="gradient-text">peptídeos</span> combina com os seus objetivos?
           </h1>
           <p className="mt-5 max-w-md text-lg text-white/70">
-            Em 60 segundos, um quiz inteligente identifica a raiz do seu problema —
-            gordura teimosa, cansaço, dor, libido ou pele — e te entrega o
-            <strong className="text-white"> protocolo exato</strong> para resolver.
+            Existem dezenas de peptídeos sendo estudados para performance, recuperação,
+            longevidade e estética. Responda 6 perguntas e receba um
+            <strong className="text-white"> guia educativo personalizado</strong> sobre o tema.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <button onClick={goQuiz} className="btn-primary px-7 py-4 text-base">
-              Quero descobrir meu protocolo →
+              Fazer o quiz grátis →
             </button>
             <a href="#como" className="rounded-full glass px-7 py-4 text-center text-sm font-semibold text-white/80 hover:text-white">
               Como funciona
@@ -58,7 +58,7 @@ export default function Landing() {
                 <span key={i} className="grid h-7 w-7 place-items-center rounded-full bg-white/10 ring-2 ring-ink">{e}</span>
               ))}
             </div>
-            +12.480 pessoas já descobriram o protocolo delas
+            +12.480 pessoas já fizeram o quiz educativo
           </div>
         </motion.div>
 
@@ -67,7 +67,7 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* MARQUEE benefícios */}
+      {/* MARQUEE — categorias (educacional) */}
       <div className="overflow-hidden border-y border-white/10 py-4">
         <div className="flex w-max animate-marquee gap-10 px-5 text-sm font-semibold text-white/40">
           {[...marqueeItems, ...marqueeItems].map((m, i) => (
@@ -76,29 +76,29 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* PONTE — app de sonhos (venda casada) */}
+      {/* PONTE — ONIRA (venda casada, sem atributo pessoal) */}
       <section className="mx-auto max-w-6xl px-5 pt-12">
         <motion.a href="/sonhos" {...fadeUp}
           className="flex flex-col items-center justify-between gap-4 rounded-3xl border border-violet-400/20 bg-gradient-to-r from-violet-500/10 to-cyan-400/10 p-6 text-center sm:flex-row sm:text-left">
           <div className="flex items-center gap-4">
             <span className="text-3xl">🌙</span>
             <div>
-              <h3 className="font-bold">Tem sonhos intensos, pesadelos ou sono ruim?</h3>
-              <p className="text-sm text-white/60">Faça o quiz do ONIRA e descubra o que sua mente processa enquanto dorme — e como o estresse afeta seu sono.</p>
+              <h3 className="font-bold">Curioso sobre o que a ciência diz dos sonhos?</h3>
+              <p className="text-sm text-white/60">Conheça o ONIRA — análise de sonhos baseada em psicologia, sem misticismo. Um quiz educativo sobre a sua mente.</p>
             </div>
           </div>
-          <span className="shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-5 py-2 text-sm font-bold text-[#060818]">Analisar meu sonho →</span>
+          <span className="shrink-0 rounded-full bg-gradient-to-r from-violet-500 to-cyan-400 px-5 py-2 text-sm font-bold text-[#060818]">Conhecer o ONIRA →</span>
         </motion.a>
       </section>
 
-      {/* DORES — descubra a sua */}
+      {/* CATEGORIAS / OBJETIVOS (neutro, sem claim de condição) */}
       <section id="como" className="mx-auto max-w-6xl px-5 py-20">
         <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-black md:text-4xl">Qual dessas dores é a <span className="gradient-text">sua</span>?</h2>
-          <p className="mt-3 text-white/60">Cada problema tem um peptídeo (ou stack) com mecanismo específico. Identifique-se:</p>
+          <h2 className="text-3xl font-black md:text-4xl">Explore por <span className="gradient-text">objetivo</span></h2>
+          <p className="mt-3 text-white/60">Cada categoria reúne peptídeos estudados para um foco específico. Escolha por onde começar a aprender:</p>
         </motion.div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {dores.map(([key, meta], i) => (
+          {categorias.map(([key, meta], i) => (
             <motion.button
               key={key}
               {...fadeUp}
@@ -107,16 +107,16 @@ export default function Landing() {
               className="group overflow-hidden rounded-2xl glass text-left transition hover:-translate-y-1 hover:card-glow"
             >
               <div className="relative h-28 w-full overflow-hidden">
-                <img src={meta.img} alt={meta.label} loading="lazy" decoding="async"
+                <img src={meta.img} alt={meta.objetivo} loading="lazy" decoding="async"
                   className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, #04130d)' }} />
                 <span className="absolute left-3 top-3 text-2xl drop-shadow">{meta.emoji}</span>
               </div>
               <div className="p-6 pt-4">
-                <h3 className="font-bold" style={{ color: meta.cor }}>{meta.label}</h3>
-                <p className="mt-2 text-sm text-white/60">{meta.dor}</p>
+                <h3 className="font-bold" style={{ color: meta.cor }}>{meta.objetivo}</h3>
+                <p className="mt-2 text-sm text-white/60">{meta.publicDesc}</p>
                 <span className="mt-4 inline-block text-xs font-semibold text-lime-glow opacity-0 transition group-hover:opacity-100">
-                  Ver meu protocolo →
+                  Explorar categoria →
                 </span>
               </div>
             </motion.button>
@@ -151,9 +151,9 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* DEPOIMENTOS */}
+      {/* DEPOIMENTOS — sobre o conteúdo/clareza, não resultados de saúde */}
       <section className="mx-auto max-w-6xl px-5 py-10">
-        <motion.h2 {...fadeUp} className="text-center text-3xl font-black md:text-4xl">Quem descobriu, mudou</motion.h2>
+        <motion.h2 {...fadeUp} className="text-center text-3xl font-black md:text-4xl">O que dizem sobre o material</motion.h2>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <motion.div key={i} {...fadeUp} transition={{ duration: 0.5, delay: i * 0.06 }} className="rounded-2xl glass p-6">
@@ -163,28 +163,29 @@ export default function Landing() {
             </motion.div>
           ))}
         </div>
+        <p className="mt-4 text-center text-[11px] text-white/30">Depoimentos referem-se à qualidade do conteúdo educativo, não a resultados de saúde.</p>
       </section>
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-4xl px-5 py-20 text-center">
         <motion.div {...fadeUp}>
-          <h2 className="text-3xl font-black md:text-5xl">Seu protocolo está a <span className="gradient-text">5 perguntas</span> de distância</h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/60">É gratuito, leva menos de 1 minuto e você sai sabendo exatamente o que fazer.</p>
+          <h2 className="text-3xl font-black md:text-5xl">Seu guia educativo está a <span className="gradient-text">6 perguntas</span> de distância</h2>
+          <p className="mx-auto mt-4 max-w-xl text-white/60">É gratuito, leva menos de 1 minuto e você sai com um panorama claro do tema.</p>
           <button onClick={goQuiz} className="btn-primary mt-8 px-10 py-5 text-lg">Começar o quiz grátis →</button>
         </motion.div>
       </section>
 
       <EcosystemStrip current="peptides" titulo="Faz parte do ecossistema Mente–Sono–Corpo" />
 
-      {/* FOOTER + DISCLAIMER */}
+      {/* FOOTER + DISCLAIMER (padrão compliance §0.1) */}
       <footer className="border-t border-white/10 px-5 py-10">
         <div className="mx-auto max-w-4xl text-center text-xs leading-relaxed text-white/40">
           <p className="mb-3 font-semibold text-white/60">Aviso importante</p>
           <p>
-            Conteúdo de caráter educativo e informativo. Peptídeos são, em grande
-            parte, comercializados para fins de pesquisa. Nada aqui constitui
-            prescrição, diagnóstico ou recomendação médica. Sempre consulte um
-            profissional de saúde qualificado antes de iniciar qualquer protocolo.
+            Conteúdo de caráter educativo e informativo. <strong className="text-white/60">Não se destina a
+            diagnosticar, tratar, curar ou prevenir qualquer doença</strong> e não substitui orientação médica.
+            Peptídeos são, em grande parte, comercializados para fins de pesquisa; muitos são investigacionais e
+            não aprovados por agências regulatórias. Sempre consulte um profissional de saúde qualificado.
           </p>
           <p className="mt-4">© {new Date().getFullYear()} Protocolo Peptídeos. Todos os direitos reservados.</p>
         </div>
@@ -194,24 +195,24 @@ export default function Landing() {
 }
 
 const marqueeItems = [
-  'Emagrecimento (GLP-1)', 'Recuperação (BPC-157)', 'Energia (NAD+)', 'Pele (GHK-Cu)',
-  'Libido (PT-141)', 'Sono profundo (DSIP)', 'Foco (Semax)', 'Massa magra (CJC+Ipa)',
+  'Metabolismo (GLP-1)', 'Recuperação (BPC-157)', 'Energia (NAD+)', 'Pele (GHK-Cu)',
+  'Vitalidade (PT-141)', 'Sono (DSIP)', 'Foco (Semax)', 'Performance (CJC+Ipa)',
 ]
 
 const steps = [
-  { t: 'Responda 5 perguntas', d: 'Conte o que mais te incomoda. O quiz identifica a raiz — não só o sintoma.' },
-  { t: 'Receba seu protocolo', d: 'Qual peptídeo, dosagem de referência, ciclo e sinergias — tudo personalizado.' },
-  { t: 'Aplique com segurança', d: 'Passo a passo, fornecedores confiáveis e checklist do que NÃO fazer.' },
+  { t: 'Responda 6 perguntas', d: 'Perguntas rápidas sobre os seus objetivos e a sua familiaridade com o tema.' },
+  { t: 'Receba seu guia', d: 'Um panorama educativo da categoria de peptídeos que mais combina com o seu objetivo.' },
+  { t: 'Aprofunde com segurança', d: 'O que a ciência diz, o status regulatório e o que levar para conversar com o seu médico.' },
 ]
 
 const stats = [
-  { n: '12.480+', l: 'protocolos personalizados gerados' },
-  { n: '9 peptídeos', l: 'mapeados por dor e objetivo' },
+  { n: '12.480+', l: 'quizzes educativos respondidos' },
+  { n: '10 peptídeos', l: 'explicados de forma didática' },
   { n: '7 dias', l: 'de garantia incondicional' },
 ]
 
 const testimonials = [
-  { q: 'Eu não sabia por onde começar. O protocolo me deu clareza total — em 3 semanas minha disposição mudou.', n: 'Rafael', r: 'energia' },
-  { q: 'Finalmente entendi qual peptídeo usar pra minha lesão no ombro. Recuperei o treino.', n: 'Camila', r: 'recuperação' },
-  { q: 'O quiz acertou minha dor na mosca. Vale cada centavo pela economia de tempo e dinheiro.', n: 'Diego', r: 'emagrecimento' },
+  { q: 'Finalmente entendi as diferenças entre as categorias sem achismo. Material muito didático.', n: 'Rafael', r: 'leitor' },
+  { q: 'O guia me deu clareza para chegar no consultório com as perguntas certas.', n: 'Camila', r: 'leitora' },
+  { q: 'Conteúdo sério e direto ao ponto. Aprendi bastante sobre o tema em poucos minutos.', n: 'Diego', r: 'leitor' },
 ]

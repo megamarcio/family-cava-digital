@@ -169,14 +169,14 @@ export default function VideoPlayer({
 
 function scriptLine(t: number, compact?: boolean): string {
   if (compact) {
-    if (t < 12) return 'Responda 5 perguntas rápidas…'
-    if (t < 24) return '…e eu descubro a raiz do seu problema.'
-    return 'Vou te dizer exatamente qual protocolo seguir.'
+    if (t < 12) return 'Responda 6 perguntas rápidas…'
+    if (t < 24) return '…sobre os seus objetivos e familiaridade com o tema.'
+    return 'No fim, você recebe um guia educativo personalizado.'
   }
-  if (t < 12) return 'E se o seu cansaço, sua gordura teimosa ou sua dor não fossem "falta de esforço"?'
-  if (t < 24) return 'Seu corpo pode estar com uma deficiência que dieta nenhuma resolve.'
-  if (t < 40) return 'Os peptídeos são moléculas que o seu corpo já reconhece — e a ciência vem provando o impacto deles.'
-  if (t < 60) return 'O problema? Ninguém te diz QUAL usar pra SUA dor específica.'
-  if (t < 90) return 'Por isso criamos um protocolo personalizado, baseado na sua resposta.'
-  return 'Clique no botão abaixo e descubra o seu agora.'
+  if (t < 12) return 'Existem dezenas de peptídeos sendo estudados pela ciência.'
+  if (t < 24) return 'Cada categoria tem um foco: performance, recuperação, longevidade, estética…'
+  if (t < 40) return 'O difícil é entender, sem achismo, o que cada uma significa.'
+  if (t < 60) return 'Por isso montamos um guia educativo, baseado em ciência.'
+  if (t < 90) return 'Responda 6 perguntas e descubra qual categoria combina com os seus objetivos.'
+  return 'Conteúdo educativo. Não diagnostica, trata ou cura doenças.'
 }
