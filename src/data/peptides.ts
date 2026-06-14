@@ -276,56 +276,56 @@ export const peptides: Peptide[] = [
 
 export const goalMeta: Record<
   Goal,
-  { label: string; dor: string; protocolo: string[]; cor: string; emoji: string }
+  { label: string; dor: string; protocolo: string[]; cor: string; emoji: string; img: string }
 > = {
   emagrecimento: {
     label: 'Emagrecimento & Metabolismo',
     dor: 'A balança não se mexe, a fome aperta à noite e a gordura teimosa não vai embora — mesmo com dieta.',
     protocolo: ['retatrutida', 'glp1', 'aod-9604'],
     cor: '#34d399',
-    emoji: '🔥',
+    emoji: '🔥', img: '/dores/emagrecimento.webp',
   },
   recuperacao: {
     label: 'Recuperação & Lesões',
     dor: 'Aquela dor crônica, tendinite ou lesão que não cicatriza e te tira do jogo.',
     protocolo: ['bpc-157', 'tb-500'],
     cor: '#22d3ee',
-    emoji: '🦾',
+    emoji: '🦾', img: '/dores/recuperacao.webp',
   },
   energia: {
     label: 'Energia & Disposição',
     dor: 'Cansaço o dia todo, névoa mental e a sensação de que sua bateria nunca carrega 100%.',
     protocolo: ['nad', 'cjc-ipa'],
     cor: '#a3e635',
-    emoji: '⚡',
+    emoji: '⚡', img: '/dores/energia.webp',
   },
   pele: {
     label: 'Pele, Cabelo & Estética',
     dor: 'A pele perdeu firmeza, surgiram linhas e o espelho não reflete como você se sente.',
     protocolo: ['ghk-cu'],
     cor: '#f472b6',
-    emoji: '✨',
+    emoji: '✨', img: '/dores/pele.webp',
   },
   libido: {
     label: 'Libido & Vitalidade',
     dor: 'O desejo sumiu e isso já afeta sua confiança e seus relacionamentos.',
     protocolo: ['pt-141'],
     cor: '#fb7185',
-    emoji: '❤️‍🔥',
+    emoji: '❤️‍🔥', img: '/dores/libido.webp',
   },
   sono: {
     label: 'Sono & Estresse',
     dor: 'Você dorme mas acorda quebrado — o sono não restaura e o estresse acumula.',
     protocolo: ['dsip', 'cjc-ipa'],
     cor: '#818cf8',
-    emoji: '🌙',
+    emoji: '🌙', img: '/dores/sono.webp',
   },
   cognitivo: {
     label: 'Foco & Cognição',
     dor: 'Falta foco, a memória falha e manter a concentração virou uma luta diária.',
     protocolo: ['semax', 'nad'],
     cor: '#60a5fa',
-    emoji: '🧠',
+    emoji: '🧠', img: '/dores/cognitivo.webp',
   },
 }
 

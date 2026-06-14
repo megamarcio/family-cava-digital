@@ -104,14 +104,21 @@ export default function Landing() {
               {...fadeUp}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               onClick={goQuiz}
-              className="group rounded-2xl glass p-6 text-left transition hover:-translate-y-1 hover:card-glow"
+              className="group overflow-hidden rounded-2xl glass text-left transition hover:-translate-y-1 hover:card-glow"
             >
-              <div className="text-3xl">{meta.emoji}</div>
-              <h3 className="mt-3 font-bold" style={{ color: meta.cor }}>{meta.label}</h3>
-              <p className="mt-2 text-sm text-white/60">{meta.dor}</p>
-              <span className="mt-4 inline-block text-xs font-semibold text-lime-glow opacity-0 transition group-hover:opacity-100">
-                Ver meu protocolo →
-              </span>
+              <div className="relative h-28 w-full overflow-hidden">
+                <img src={meta.img} alt={meta.label} loading="lazy" decoding="async"
+                  className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, #04130d)' }} />
+                <span className="absolute left-3 top-3 text-2xl drop-shadow">{meta.emoji}</span>
+              </div>
+              <div className="p-6 pt-4">
+                <h3 className="font-bold" style={{ color: meta.cor }}>{meta.label}</h3>
+                <p className="mt-2 text-sm text-white/60">{meta.dor}</p>
+                <span className="mt-4 inline-block text-xs font-semibold text-lime-glow opacity-0 transition group-hover:opacity-100">
+                  Ver meu protocolo →
+                </span>
+              </div>
             </motion.button>
           ))}
         </div>
