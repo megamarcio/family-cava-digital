@@ -14,6 +14,7 @@ import Lumen from './pages/Lumen'
 import NoitePlena from './pages/NoitePlena'
 import Circulo from './pages/Circulo'
 import Entrega from './pages/Entrega'
+import Saber from './pages/Saber'
 import Manual from './pages/Manual'
 import Admin from './pages/Admin'
 
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/noite-plena" element={<NoitePlena />} />
         <Route path="/circulo" element={<Circulo />} />
         <Route path="/entrega" element={<Entrega />} />
+        <Route path="/saber-mais" element={<Saber />} />
         <Route path="/marca" element={<Manual />} />
         <Route path="/obrigado" element={<Obrigado />} />
         <Route path="/admin" element={<Admin />} />

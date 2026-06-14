@@ -66,6 +66,8 @@ export interface AdminConfig {
   pixKey?: string
   whatsapp?: string
   suppliers?: Supplier[]
+  // entrada do funil: 'bridge' (página curta antes do quiz) | 'quiz' (cai direto no quiz)
+  funnelEntry?: 'bridge' | 'quiz'
 }
 export function loadConfig(): AdminConfig {
   try {

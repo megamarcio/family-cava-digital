@@ -69,7 +69,7 @@ export default function Admin() {
       {/* Content */}
       <main className="mesh flex-1 px-5 py-6 md:px-10">
         {tab === 'overview' && (
-          <Overview pct={pct} completed={completed} total={allTasks.length} cfg={cfg} setTab={setTab} />
+          <Overview pct={pct} completed={completed} total={allTasks.length} cfg={cfg} setTab={setTab} setField={setField} />
         )}
 
         {tab === 'tasks' && (
@@ -231,9 +231,10 @@ export default function Admin() {
   )
 }
 
-function Overview({ pct, completed, total, cfg, setTab }: {
-  pct: number; completed: number; total: number; cfg: AdminConfig; setTab: (t: Tab) => void
+function Overview({ pct, completed, total, cfg, setTab, setField }: {
+  pct: number; completed: number; total: number; cfg: AdminConfig; setTab: (t: Tab) => void; setField: (p: Partial<AdminConfig>) => void
 }) {
+  const entry = cfg.funnelEntry === 'quiz' ? 'quiz' : 'bridge'
   const checks = [
     { ok: !!cfg.globalpayKey || !!cfg.noxpayKey, label: 'Gateway de pagamento configurado' },
     { ok: !!cfg.vslUrl, label: 'VSL da landing configurada' },
@@ -263,6 +264,32 @@ function Overview({ pct, completed, total, cfg, setTab }: {
             ))}
           </ul>
         </div>
+      </div>
+
+      {/* Entrada do funil — teste A/B */}
+      <div className="mt-6 rounded-2xl glass p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div className="text-sm font-bold">Entrada do funil (teste A/B)</div>
+            <div className="text-xs text-white/50">Define o que o anúncio encontra ao cair em <code>/</code>.</div>
+          </div>
+          <div className="flex gap-2">
+            {([
+              { id: 'bridge', label: 'A · Bridge curta' },
+              { id: 'quiz', label: 'B · Direto no quiz' },
+            ] as const).map((o) => (
+              <button key={o.id} onClick={() => setField({ funnelEntry: o.id })}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${entry === o.id ? 'bg-lime-glow/15 text-lime-glow' : 'glass text-white/60 hover:text-white'}`}>
+                {o.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="mt-3 text-xs text-white/40">
+          {entry === 'bridge'
+            ? 'A: página curta (gancho + CTA) antes do quiz. Mais confiança/coerência pro Meta. Conteúdo profundo em /saber-mais.'
+            : 'B: o anúncio cai direto na 1ª pergunta do quiz. Máxima taxa de início — use com conta aquecida.'}
+        </p>
       </div>
 
       <h3 className="mt-8 mb-3 text-lg font-bold">O funil, ponta a ponta</h3>
